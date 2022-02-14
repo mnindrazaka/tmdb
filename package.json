@@ -4,9 +4,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack serve --config webpack.config.js",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@types/react": "^17.0.39",
@@ -21,9 +22,16 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@testing-library/dom": "^8.11.3",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.4.0",
+    "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.6.0",
     "html-webpack-plugin": "^5.5.0",
+    "jest": "^27.5.1",
     "style-loader": "^3.3.1",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2",
