@@ -1,38 +1,21 @@
 import React from "react";
 
-type IdleState = {
-  tag: "idle";
-};
+type State<T> =
+  | { tag: "idle" }
+  | { tag: "loading" }
+  | { tag: "success"; data: T }
+  | { tag: "error"; error: Error };
 
-type LoadingState = {
-  tag: "loading";
-};
-
-type SuccessState<T> = {
-  tag: "success";
-  data: T;
-};
-
-type ErrorState = {
-  tag: "error";
-  error: Error;
-};
-
-type State<T> = IdleState | LoadingState | SuccessState<T> | ErrorState;
-
-type FetchAction = { tag: "fetch" };
-
-type FetchSuccessAction<T> = { tag: "fetchSuccess"; data: T };
-
-type FetchErrorAction = { tag: "fetchError"; error: Error };
-
-type Action<T> = FetchAction | FetchSuccessAction<T> | FetchErrorAction;
+type Action<T> =
+  | { tag: "fetch" }
+  | { tag: "fetchSuccess"; data: T }
+  | { tag: "fetchError"; error: Error };
 
 type Callback<T> = () => Promise<T>;
 
 const onStateChange = <T>(
   state: State<T>,
-  dispatch: (action: Action<T>) => void,
+  dispatch: React.Dispatch<Action<T>>,
   callback: Callback<T>
 ) => {
   switch (state.tag) {
