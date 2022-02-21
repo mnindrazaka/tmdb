@@ -34,8 +34,8 @@ const onStateChange = <T>(
       break;
     }
     default: {
-      const _exhaustiveCheck: never = state;
-      return _exhaustiveCheck;
+      const exhaustiveCheck: never = state;
+      return exhaustiveCheck;
     }
   }
 };
@@ -54,8 +54,8 @@ const createReducer =
             return state;
           }
           default: {
-            const _exhaustiveCheck: never = action;
-            return _exhaustiveCheck;
+            const exhaustiveCheck: never = action;
+            return exhaustiveCheck;
           }
         }
       }
@@ -71,8 +71,8 @@ const createReducer =
             return { tag: "error", error: action.error };
           }
           default: {
-            const _exhaustiveCheck: never = action;
-            return _exhaustiveCheck;
+            const exhaustiveCheck: never = action;
+            return exhaustiveCheck;
           }
         }
       }
@@ -84,8 +84,8 @@ const createReducer =
             return state;
           }
           default: {
-            const _exhaustiveCheck: never = action;
-            return _exhaustiveCheck;
+            const exhaustiveCheck: never = action;
+            return exhaustiveCheck;
           }
         }
       }
@@ -97,14 +97,14 @@ const createReducer =
             return state;
           }
           default: {
-            const _exhaustiveCheck: never = action;
-            return _exhaustiveCheck;
+            const exhaustiveCheck: never = action;
+            return exhaustiveCheck;
           }
         }
       }
       default: {
-        const _exhaustiveCheck: never = state;
-        return _exhaustiveCheck;
+        const exhaustiveCheck: never = state;
+        return exhaustiveCheck;
       }
     }
   };
