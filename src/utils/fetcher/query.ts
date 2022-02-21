@@ -82,7 +82,9 @@ const createReducer =
       }
       case "success": {
         switch (action.tag) {
-          case "fetch":
+          case "fetch": {
+            return { tag: "loading" };
+          }
           case "fetchSuccess":
           case "fetchError": {
             return state;
@@ -95,7 +97,9 @@ const createReducer =
       }
       case "error": {
         switch (action.tag) {
-          case "fetch":
+          case "fetch": {
+            return { tag: "loading" };
+          }
           case "fetchSuccess":
           case "fetchError": {
             return state;
