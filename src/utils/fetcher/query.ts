@@ -13,14 +13,18 @@ type Action<T> =
 
 type Callback<T> = () => Promise<T>;
 
+type Config = { lazy: boolean };
+const defaultConfig: Config = { lazy: false };
+
 const onStateChange = <T>(
   state: State<T>,
   dispatch: React.Dispatch<Action<T>>,
-  callback: Callback<T>
+  callback: Callback<T>,
+  config: Config
 ) => {
   switch (state.tag) {
     case "idle": {
-      dispatch({ tag: "fetch" });
+      if (!config.lazy) dispatch({ tag: "fetch" });
       break;
     }
     case "loading": {
@@ -109,17 +113,24 @@ const createReducer =
     }
   };
 
+type UseQuery<T> = { state: State<T>; refetch: () => void };
+
 export const useQuery = <T>(
   key: string,
-  callback: Callback<T>
-): { state: State<T> } => {
+  callback: Callback<T>,
+  config: Config = defaultConfig
+): UseQuery<T> => {
   const [state, dispatch] = React.useReducer(createReducer<T>(), {
     tag: "idle",
   });
 
   React.useEffect(() => {
-    onStateChange(state, dispatch, callback);
-  }, [state, dispatch, callback]);
+    onStateChange(state, dispatch, callback, config);
+  }, [state, dispatch, callback, config]);
 
-  return { state };
+  const refetch = React.useCallback(() => {
+    dispatch({ tag: "fetch" });
+  }, [dispatch]);
+
+  return { state, refetch };
 };

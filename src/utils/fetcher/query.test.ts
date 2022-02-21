@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react-hooks";
 import { useQuery } from "./query";
 
 it("should return success state with correct data", async () => {
@@ -33,4 +33,22 @@ it("should return error state with correct error object", async () => {
   await waitForNextUpdate();
 
   expect(result.current.state).toEqual({ tag: "error", error });
+});
+
+it("should not trigger fetch automatically when lazy is turned on", async () => {
+  const data = ["aka", "andri"];
+  const fetchData = () =>
+    new Promise<string[]>((resolve) => setTimeout(() => resolve(data), 1000));
+
+  const { result, waitForNextUpdate } = renderHook(() =>
+    useQuery<string[]>("test", fetchData, { lazy: true })
+  );
+
+  expect(result.current.state).toEqual({ tag: "idle" });
+
+  act(() => result.current.refetch());
+
+  await waitForNextUpdate();
+
+  expect(result.current.state).toEqual({ tag: "success", data });
 });
