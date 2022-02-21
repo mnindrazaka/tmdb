@@ -1,9 +1,9 @@
 name: commit & pull request
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
 jobs:
   check-test-and-install-package:
     runs-on: ubuntu-latest
