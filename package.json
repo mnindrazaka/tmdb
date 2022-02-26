@@ -9,7 +9,11 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "storybook": "start-storybook -p 6006",
+<<<<<<< HEAD
     "build-storybook": "build-storybook"
+=======
+    "storybook:build": "build-storybook"
+>>>>>>> 6c021d711787ee494123e9f93abdbdda6c7fbab3
   },
   "dependencies": {
     "@types/react": "^17.0.39",
