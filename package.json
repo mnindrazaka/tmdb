@@ -9,11 +9,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "storybook": "start-storybook -p 6006",
-<<<<<<< HEAD
-    "build-storybook": "build-storybook"
-=======
-    "storybook:build": "build-storybook"
->>>>>>> 6c021d711787ee494123e9f93abdbdda6c7fbab3
+    "storybook:build": "build-storybook",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "@types/react": "^17.0.39",
@@ -36,6 +34,7 @@
     "@storybook/addon-links": "^6.4.19",
     "@storybook/react": "^6.4.19",
     "@storybook/testing-library": "^0.0.9",
+    "@testing-library/cypress": "^8.0.2",
     "@testing-library/dom": "^8.11.3",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
@@ -46,10 +45,12 @@
     "babel-loader": "^8.2.3",
     "clsx": "^1.1.1",
     "css-loader": "^6.6.0",
+    "cypress": "^9.5.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.5.1",
     "msw": "^0.38.1",
     "style-loader": "^3.3.1",
+    "typescript": "^4.5.5",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.4"
