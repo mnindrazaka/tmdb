@@ -1,5 +1,6 @@
 import { renderHook, act } from "@testing-library/react-hooks";
-import { useQuery } from "./query";
+import * as Query from "./Query";
+import * as QueryContext from "./QueryContext";
 
 it("should return success state with correct data", async () => {
   const data = ["aka", "andri"];
@@ -7,7 +8,7 @@ it("should return success state with correct data", async () => {
     new Promise<string[]>((resolve) => setTimeout(() => resolve(data), 1000));
 
   const { result, waitForNextUpdate } = renderHook(() =>
-    useQuery<string[]>("test", fetchData)
+    Query.useQuery<string[]>("test", fetchData)
   );
 
   expect(result.current.state).toEqual({ tag: "loading" });
@@ -25,7 +26,7 @@ it("should return error state with correct error object", async () => {
     );
 
   const { result, waitForNextUpdate } = renderHook(() =>
-    useQuery<[]>("test", fetchData)
+    Query.useQuery<[]>("test", fetchData)
   );
 
   expect(result.current.state).toEqual({ tag: "loading" });
@@ -41,7 +42,7 @@ it("should not trigger fetch automatically when lazy is turned on", async () => 
     new Promise<string[]>((resolve) => setTimeout(() => resolve(data), 1000));
 
   const { result, waitForNextUpdate } = renderHook(() =>
-    useQuery<string[]>("test", fetchData, { lazy: true })
+    Query.useQuery<string[]>("test", fetchData, { lazy: true })
   );
 
   expect(result.current.state).toEqual({ tag: "idle" });
@@ -59,7 +60,7 @@ it("can trigger fetch after fetching has been success", async () => {
     new Promise<string[]>((resolve) => setTimeout(() => resolve(data), 1000));
 
   const { result, waitForNextUpdate } = renderHook(() =>
-    useQuery<string[]>("test", fetchData)
+    Query.useQuery<string[]>("test", fetchData)
   );
 
   await waitForNextUpdate();
@@ -80,7 +81,7 @@ it("can trigger fetch after fetching has been error", async () => {
     );
 
   const { result, waitForNextUpdate } = renderHook(() =>
-    useQuery<string[]>("test", fetchData)
+    Query.useQuery<string[]>("test", fetchData)
   );
 
   await waitForNextUpdate();
@@ -91,4 +92,24 @@ it("can trigger fetch after fetching has been error", async () => {
 
   await waitForNextUpdate();
   expect(result.current.state).toEqual({ tag: "error", error });
+});
+
+it("can get existing state from cache", async () => {
+  const data = ["aka", "andri"];
+  const wrapper = ({ children }: { children: React.ReactNode }) => (
+    <QueryContext.Provider initialStore={{ test: { tag: "success", data } }}>
+      {children}
+    </QueryContext.Provider>
+  );
+
+  const fetchData = () =>
+    new Promise<string[]>((resolve) => setTimeout(() => resolve(data), 1000));
+  const { result } = renderHook(
+    () => Query.useQuery<string[]>("test", fetchData),
+    {
+      wrapper,
+    }
+  );
+
+  expect(result.current.state).toEqual({ tag: "success", data });
 });
