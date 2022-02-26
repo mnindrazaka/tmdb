@@ -1,52 +1,57 @@
-import React from "react";
+import * as Query from "./Query";
+import * as QueryContext from "./QueryContext";
 
-type State<T> =
-  | { tag: "idle" }
-  | { tag: "loading" }
-  | { tag: "success"; data: T }
-  | { tag: "error"; error: Error };
+export namespace State {
+  export type t<T> =
+    | { tag: "idle" }
+    | { tag: "loading" }
+    | { tag: "success"; data: T }
+    | { tag: "error"; error: Error };
 
-type Action<T> =
-  | { tag: "fetch" }
-  | { tag: "fetchSuccess"; data: T }
-  | { tag: "fetchError"; error: Error };
-
-type Callback<T> = () => Promise<T>;
-
-type Config = { lazy: boolean };
-const defaultConfig: Config = { lazy: false };
-
-const onStateChange = <T>(
-  state: State<T>,
-  dispatch: React.Dispatch<Action<T>>,
-  callback: Callback<T>,
-  config: Config
-) => {
-  switch (state.tag) {
-    case "idle": {
-      if (!config.lazy) dispatch({ tag: "fetch" });
-      break;
+  export const onChange = <T>(
+    state: t<T>,
+    dispatch: React.Dispatch<Action.t<T>>,
+    callback: Query.Callback.t<T>,
+    config: Query.Config.t
+  ) => {
+    switch (state.tag) {
+      case "idle": {
+        if (!config.lazy) dispatch({ tag: "fetch" });
+        break;
+      }
+      case "loading": {
+        callback()
+          .then((data) => dispatch({ tag: "fetchSuccess", data }))
+          .catch((error) => dispatch({ tag: "fetchError", error }));
+        break;
+      }
+      case "success":
+      case "error": {
+        break;
+      }
+      default: {
+        const exhaustiveCheck: never = state;
+        return exhaustiveCheck;
+      }
     }
-    case "loading": {
-      callback()
-        .then((data) => dispatch({ tag: "fetchSuccess", data }))
-        .catch((error) => dispatch({ tag: "fetchError", error }));
-      break;
-    }
-    case "success":
-    case "error": {
-      break;
-    }
-    default: {
-      const exhaustiveCheck: never = state;
-      return exhaustiveCheck;
-    }
-  }
-};
+  };
 
-const createReducer =
+  export const make = <T>(store: QueryContext.Store.t, key: string): t<T> => {
+    const state = store[key];
+    return state ?? { tag: "idle" };
+  };
+}
+
+export namespace Action {
+  export type t<T> =
+    | { tag: "fetch" }
+    | { tag: "fetchSuccess"; data: T }
+    | { tag: "fetchError"; error: Error };
+}
+
+export const make =
   <T>() =>
-  (state: State<T>, action: Action<T>): State<T> => {
+  (state: State.t<T>, action: Action.t<T>): State.t<T> => {
     switch (state.tag) {
       case "idle": {
         switch (action.tag) {
@@ -116,25 +121,3 @@ const createReducer =
       }
     }
   };
-
-type UseQuery<T> = { state: State<T>; refetch: () => void };
-
-export const useQuery = <T>(
-  key: string,
-  callback: Callback<T>,
-  config: Config = defaultConfig
-): UseQuery<T> => {
-  const [state, dispatch] = React.useReducer(createReducer<T>(), {
-    tag: "idle",
-  });
-
-  React.useEffect(() => {
-    onStateChange(state, dispatch, callback, config);
-  }, [state, dispatch, callback, config]);
-
-  const refetch = React.useCallback(() => {
-    dispatch({ tag: "fetch" });
-  }, [dispatch]);
-
-  return { state, refetch };
-};
