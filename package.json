@@ -7,7 +7,9 @@
     "dev": "webpack serve --config webpack.config.js",
     "build": "webpack --config webpack.config.js",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "storybook": "start-storybook -p 6006",
+    "storybook:build": "build-storybook"
   },
   "dependencies": {
     "@types/react": "^17.0.39",
@@ -24,6 +26,12 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@storybook/addon-actions": "^6.4.19",
+    "@storybook/addon-essentials": "^6.4.19",
+    "@storybook/addon-interactions": "^6.4.19",
+    "@storybook/addon-links": "^6.4.19",
+    "@storybook/react": "^6.4.19",
+    "@storybook/testing-library": "^0.0.9",
     "@testing-library/dom": "^8.11.3",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
@@ -32,6 +40,7 @@
     "@types/jest": "^27.4.0",
     "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.3",
+    "clsx": "^1.1.1",
     "css-loader": "^6.6.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.5.1",
