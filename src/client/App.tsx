@@ -1,14 +1,7 @@
 import React from "react";
-import axios from "axios";
 import Image from "./asset/resource/logo.png";
+import { usersApi, User } from "../utils/fetcher";
 import "./app.css";
-
-interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-}
 
 const App = () => {
   const [loading, setLoading] = React.useState(false);
@@ -16,8 +9,8 @@ const App = () => {
 
   React.useEffect(() => {
     setLoading(true);
-    axios.get("https://jsonplaceholder.typicode.com/users").then((res) => {
-      setUsers(res.data);
+    usersApi.getUsers().then((users) => {
+      setUsers(users);
       setLoading(false);
     });
   }, []);
