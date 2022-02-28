@@ -2,7 +2,8 @@ import React from "react";
 import { usersApi, User } from "utils/fetcher";
 import "./index.css";
 import Home from "@/pages/Home";
-
+import "./index.css";
+import { Heading } from "@chakra-ui/react";
 const App = () => {
   const [loading, setLoading] = React.useState(false);
   const [users, setUsers] = React.useState<User[]>([]);
@@ -21,9 +22,12 @@ const App = () => {
       {loading ? (
         <p>loading...</p>
       ) : (
-        users.map((user) => <h1 key={user.id}>{user.name}</h1>)
+        users.map((user) => (
+          <Heading as={"h1"} key={user.id}>
+            {user.name}
+          </Heading>
+        ))
       )}
-
       <h1>hello world</h1>
       <button className="btn layout">Submit</button>
     </div>
