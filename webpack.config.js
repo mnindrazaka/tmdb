@@ -1,9 +1,10 @@
 const path = require("path");
 const htmlWebpackPlugin = require("html-webpack-plugin");
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  entry: path.resolve(__dirname, "./src/client/index.tsx"),
+  entry: path.resolve(__dirname, "./src/index.tsx"),
   output: {
     path: path.resolve(__dirname, "./build"),
     filename: "[name].[contenthash].js",
@@ -11,6 +12,11 @@ module.exports = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
+    preferRelative: true,
+    alias: {
+      "@/*": path.resolve(__dirname, "src/**"),
+    },
+    plugins: [new TsconfigPathsPlugin({})],
   },
   module: {
     rules: [
