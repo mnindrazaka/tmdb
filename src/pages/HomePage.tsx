@@ -2,7 +2,7 @@ import { Heading } from "@chakra-ui/react";
 import React from "react";
 import { User, usersApi } from "../utils/fetcher";
 
-const Homepage = () => {
+const HomePage = () => {
   const [loading, setLoading] = React.useState(false);
   const [users, setUsers] = React.useState<User[]>([]);
 
@@ -31,4 +31,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default HomePage;
