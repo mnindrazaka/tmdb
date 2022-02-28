@@ -1,7 +1,7 @@
 import React from "react";
-import Image from "./asset/resource/logo.png";
-import { usersApi, User } from "../utils/fetcher";
-import "./app.css";
+import { usersApi, User } from "utils/fetcher";
+import "./index.css";
+import Home from "@/pages/Home";
 
 const App = () => {
   const [loading, setLoading] = React.useState(false);
@@ -17,6 +17,7 @@ const App = () => {
 
   return (
     <div>
+      <Home />
       {loading ? (
         <p>loading...</p>
       ) : (
@@ -24,7 +25,6 @@ const App = () => {
       )}
 
       <h1>hello world</h1>
-      <img src={Image} alt="react logo" />
       <button className="btn layout">Submit</button>
     </div>
   );
