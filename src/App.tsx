@@ -1,8 +1,7 @@
 import React from "react";
-import Image from "./asset/resource/logo.png";
-import { usersApi, User } from "../utils/fetcher";
-import "./app.css";
-import { Heading, HStack, Text } from "@chakra-ui/react";
+import { usersApi, User } from "./utils/fetcher";
+import "./index.css";
+import { Heading } from "@chakra-ui/react";
 
 const App = () => {
   const [loading, setLoading] = React.useState(false);
@@ -28,7 +27,6 @@ const App = () => {
         ))
       )}
       <h1>hello world</h1>
-      <img src={Image} alt="react logo" />
       <button className="btn layout">Submit</button>
     </div>
   );
