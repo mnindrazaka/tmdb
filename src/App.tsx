@@ -1,7 +1,7 @@
 import React from "react";
-import Image from "./asset/resource/logo.png";
-import { usersApi, User } from "../utils/fetcher";
-import "./app.css";
+import { usersApi, User } from "./utils/fetcher";
+import "./index.css";
+import { Heading } from "@chakra-ui/react";
 
 const App = () => {
   const [loading, setLoading] = React.useState(false);
@@ -20,11 +20,13 @@ const App = () => {
       {loading ? (
         <p>loading...</p>
       ) : (
-        users.map((user) => <h1 key={user.id}>{user.name}</h1>)
+        users.map((user) => (
+          <Heading as={"h1"} key={user.id}>
+            {user.name}
+          </Heading>
+        ))
       )}
-
       <h1>hello world</h1>
-      <img src={Image} alt="react logo" />
       <button className="btn layout">Submit</button>
     </div>
   );
