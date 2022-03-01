@@ -3,10 +3,10 @@ import {
   screen,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
-import App from "@/App";
+import HomePage from "@/pages/HomePage";
 
 const renderApp = async () => {
-  render(<App />);
+  render(<HomePage />);
   await waitForElementToBeRemoved(() => screen.getByText("loading..."));
 };
 
