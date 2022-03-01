@@ -3,7 +3,7 @@ import {
   screen,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
-import HomePage from "./pages/HomePage";
+import HomePage from "./HomePage";
 
 const renderApp = async () => {
   render(<HomePage />);
