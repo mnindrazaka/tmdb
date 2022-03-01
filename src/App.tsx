@@ -1,9 +1,9 @@
 import React from "react";
-import { usersApi, User } from "utils/fetcher";
-import "./index.css";
-import Home from "@/pages/Home";
-import "./index.css";
+import { usersApi, User } from "@/utils/fetcher";
+import HomePage from "@/pages/HomePage";
 import { Heading } from "@chakra-ui/react";
+import "@/index.css";
+
 const App = () => {
   const [loading, setLoading] = React.useState(false);
   const [users, setUsers] = React.useState<User[]>([]);
@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <div>
-      <Home />
+      <HomePage />
       {loading ? (
         <p>loading...</p>
       ) : (

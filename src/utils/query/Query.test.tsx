@@ -1,6 +1,6 @@
 import { renderHook, act } from "@testing-library/react-hooks";
-import * as Query from "./Query";
-import * as QueryContext from "./QueryContext";
+import * as Query from "@/utils/query/Query";
+import * as QueryContext from "@/utils/query/QueryContext";
 
 it("should return success state with correct data", async () => {
   const data = ["aka", "andri"];
