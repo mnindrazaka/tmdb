@@ -1,6 +1,6 @@
-import { Configuration, PostsApi, UsersApi } from "../../__generated__/api";
+import { Configuration, PostsApi, UsersApi } from "@/__generated__/api";
 
-export * from "../../__generated__/api";
+export * from "@/__generated__/api";
 
 const configuration = new Configuration({
   basePath: "https://jsonplaceholder.typicode.com",
