@@ -1,6 +1,6 @@
 import React from "react";
-import * as QueryReducer from "./QueryReducer";
-import * as QueryContext from "./QueryContext";
+import * as QueryReducer from "@/utils/query/QueryReducer";
+import * as QueryContext from "@/utils/query/QueryContext";
 
 export namespace Config {
   export type t = { lazy: boolean };
