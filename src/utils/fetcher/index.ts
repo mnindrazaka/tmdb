@@ -1,11 +1,9 @@
-import { Configuration, PostsApi, UsersApi } from "@/__generated__/api";
+import { Configuration, MoviesApi } from "@/__generated__/api";
 
 export * from "@/__generated__/api";
 
 const configuration = new Configuration({
-  basePath: "https://jsonplaceholder.typicode.com",
+  basePath: "https://api.themoviedb.org/3",
 });
 
-export const postsApi = new PostsApi(configuration);
-
-export const usersApi = new UsersApi(configuration);
+export const moviesApi = new MoviesApi(configuration);

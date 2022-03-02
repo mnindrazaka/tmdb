@@ -1,102 +1,74 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: JSON Placeholder API
-  description: See https://jsonplaceholder.typicode.com/
+  title: TMDB API
+  description: See https://api.themoviedb.org/3/
 paths:
-  /posts:
+  /movie/popular:
     get:
-      description: Returns all posts
-      tags: ["Posts"]
-      operationId: "getPosts"
-      responses:
-        "200":
-          description: Successful response
-          content:
-            "application/json":
-              schema:
-                $ref: "#/components/schemas/PostsList"
-
-  /posts/{id}:
-    get:
-      description: Returns a post by id
-      tags: ["Posts"]
-      operationId: "getPost"
+      description: Returns all movies
+      tags: ["Movies"]
+      operationId: "getMovies"
       parameters:
-        - name: id
-          in: path
+        - name: api_key
+          in: query
           required: true
-          description: The user id.
+          description: The api key
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         "200":
           description: Successful response
           content:
             "application/json":
               schema:
-                $ref: "#/components/schemas/Post"
+                $ref: "#/components/schemas/MoviePopular"
         "404":
-          description: Post not found
+          description: Movie not found
 
-  /users:
-    get:
-      description: Returns all users
-      tags: ["Users"]
-      operationId: "getUsers"
-      responses:
-        "200":
-          description: Sccuessful response
-          content:
-            "application/json":
-              schema:
-                $ref: "#/components/schemas/UsersList"
 components:
   schemas:
-    PostsList:
-      "type": "array"
-      "items":
-        $ref: "#/components/schemas/Post"
-    Post:
-      "type": "object"
-      "required":
-        - "id"
-        - "userId"
-        - "title"
-        - "completed"
-      "properties":
+    MoviePopular:
+      type: "object"
+      properties:
+        page:
+          type: "string"
+        results:
+          $ref: "#/components/MovieList"
+    MovieList:
+      type: "array"
+      items:
+        $ref: "#/components/Movie"
+    Movie:
+      type: "object"
+      properties:
+        adult:
+          type: "boolean"
+        backdrop_path:
+          type: "integer"
+        genre_ids":
+          type: "array"
+          items:
+            type: "integer"
         id:
           type: "integer"
-        userId:
+        original_language:
+          type: "string"
+        original_title:
+          type: "string"
+        overview:
+          type: "string"
+        popularity:
           type: "integer"
+        poster_path:
+          type: "string"
+        release_date:
+          type: "string"
         title:
           type: "string"
-        completed:
-          type: "string"
-    UsersList:
-      "type": "array"
-      "items":
-        $ref: "#/components/schemas/User"
-    User:
-      "type": "object"
-      "required":
-        - "id"
-        - "name"
-        - "username"
-        - "email"
-        - "phone"
-        - "website"
-      "properties":
-        id:
+        video:
+          type: "boolean"
+        vote_average:
           type: "integer"
-        name:
-          type: "string"
-        username:
-          type: "string"
-        email:
-          type: "string"
-        phone:
-          type: "string"
-        website:
-          type: "string"
+        vote_count:
+          type: "integer"
