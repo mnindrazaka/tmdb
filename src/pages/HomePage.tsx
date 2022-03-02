@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 import { Movie, moviesApi } from "@/utils/fetcher";
 
 const HomePage = () => {
@@ -10,8 +10,10 @@ const HomePage = () => {
     setLoading(true);
     moviesApi
       .getMovies({ apiKey: "11dfe233fe073aab1aaa3389310e3358" })
-      .then((res) => setMovies(res.results));
-    setLoading(false);
+      .then((res) => {
+        setMovies(res.results);
+        setLoading(false);
+      });
   }, []);
 
   return (
