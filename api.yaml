@@ -6,9 +6,9 @@ info:
 paths:
   /movie/popular:
     get:
-      description: Returns all movies
+      description: Returns all popular movies
       tags: ["Movies"]
-      operationId: "getMovies"
+      operationId: "getMoviePopular"
       parameters:
         - name: api_key
           in: query
@@ -30,9 +30,12 @@ components:
   schemas:
     MoviePopular:
       type: "object"
+      "required":
+        - "page"
+        - "results"
       properties:
         page:
-          type: "string"
+          type: "number"
         results:
           $ref: "#/components/MovieList"
     MovieList:
@@ -41,6 +44,19 @@ components:
         $ref: "#/components/Movie"
     Movie:
       type: "object"
+      required:
+        - "id"
+        - "adult"
+        - "genre_ids"
+        - "original_language"
+        - "original_title"
+        - "overview"
+        - "popularity"
+        - "release_date"
+        - "title"
+        - "video"
+        - "vote_average"
+        - "vote_count"
       properties:
         adult:
           type: "boolean"
