@@ -16,11 +16,11 @@ test("App should have a heading.", async () => {
   expect(header).toBeInTheDocument();
 });
 
-test("Should render list of name", async () => {
+test("Should render list title of the movie", async () => {
   await renderApp();
 
   const results = await screen.findByRole("heading", {
-    name: "Leanne Graham",
+    name: "Spider-Man: No Way Home",
   });
 
   expect(results).toBeInTheDocument();

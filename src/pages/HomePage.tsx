@@ -1,17 +1,19 @@
-import { Heading } from "@chakra-ui/react";
 import React from "react";
-import { User, usersApi } from "@/utils/fetcher";
+import { Heading } from "@chakra-ui/react";
+import { Movie, moviesApi } from "@/utils/fetcher";
 
 const HomePage = () => {
   const [loading, setLoading] = React.useState(false);
-  const [users, setUsers] = React.useState<User[]>([]);
+  const [movies, setMovies] = React.useState<Movie[]>([]);
 
   React.useEffect(() => {
     setLoading(true);
-    usersApi.getUsers().then((users) => {
-      setUsers(users);
-      setLoading(false);
-    });
+    moviesApi
+      .getMoviePopular({ apiKey: "11dfe233fe073aab1aaa3389310e3358" })
+      .then((res) => {
+        setMovies(res.results);
+        setLoading(false);
+      });
   }, []);
 
   return (
@@ -19,9 +21,9 @@ const HomePage = () => {
       {loading ? (
         <p>loading...</p>
       ) : (
-        users.map((user) => (
-          <Heading as={"h1"} key={user.id}>
-            {user.name}
+        movies.map((movie) => (
+          <Heading as={"h1"} key={movie.id}>
+            {movie.originalTitle}
           </Heading>
         ))
       )}
