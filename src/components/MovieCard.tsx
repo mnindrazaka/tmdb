@@ -67,7 +67,11 @@ const MovieCard = (props: MovieCardProps) => {
                 {props.title}
               </Heading>
               <Text marginTop={8} color={"gray.700"}>
-                {props.release_date}
+                {new Intl.DateTimeFormat("en-US", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                }).format(new Date(props.release_date))}
               </Text>
             </VStack>
           </GridItem>
