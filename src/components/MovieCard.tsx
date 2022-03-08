@@ -8,26 +8,32 @@ import {
   Text,
   VStack,
   GridItem,
-  Stack,
   Flex,
+  BoxProps,
+  Stack,
+  Skeleton,
 } from "@chakra-ui/react";
 
-type MovieCardProps =
+type MovieCardProps = (
   | { isLoading: true }
   | {
-      poster_path: string;
-      title: string;
-      release_date: string;
-      vote_count: number;
       isLoading?: false;
-    };
+      posterPath: string;
+      title: string;
+      releaseDate: string;
+      voteCount: number;
+    }
+) &
+  BoxProps;
 
 const MovieCard = (props: MovieCardProps) => {
+  const { isLoading, ...boxProps } = props;
+
   return (
-    <Box p={"6"}>
+    <Box {...boxProps}>
       {props.isLoading ? (
-        <GridItem rounded={8} boxShadow={"base"} w={36}>
-          <Box backgroundColor={"gray.300"} h={"52"} w={"36"} roundedTop={8} />
+        <Box rounded={8} boxShadow={"base"}>
+          <Box backgroundColor={"gray.300"} h={"52"} roundedTop={8} />
           <Flex
             alignItems={"center"}
             justifyContent={"center"}
@@ -42,13 +48,17 @@ const MovieCard = (props: MovieCardProps) => {
           >
             <Text color={"white"}>NR</Text>
           </Flex>
-        </GridItem>
+          <Stack p={4}>
+            <Skeleton height="12px" />
+            <Skeleton height="12px" />
+          </Stack>
+        </Box>
       ) : (
-        <Grid templateColumns="repeat(1, 1fr)" gap={6} my={6} pb={"20"}>
-          <GridItem rounded={8} boxShadow={"base"} w={36}>
-            <Image src={props.poster_path} h={"52"} w={"36"} roundedTop={8} />
+        <Grid templateColumns="repeat(1, 1fr)" gap={6}>
+          <GridItem rounded={8} boxShadow={"base"}>
+            <Image src={props.posterPath} h={"52"} w={"full"} roundedTop={8} />
             <CircularProgress
-              value={props.vote_count / 100}
+              value={props.voteCount / 100}
               color="green.500"
               ml={2}
               position={"relative"}
@@ -59,10 +69,10 @@ const MovieCard = (props: MovieCardProps) => {
               borderRadius={"full"}
             >
               <CircularProgressLabel>
-                {Math.round(props.vote_count / 100)}%
+                {Math.round(props.voteCount / 100)}%
               </CircularProgressLabel>
             </CircularProgress>
-            <VStack spacing={0} p={2} alignItems={"start"} mt={-4}>
+            <VStack spacing={0} p={4} alignItems={"start"} mt={-4}>
               <Heading as={"h6"} size={"sm"}>
                 {props.title}
               </Heading>
@@ -71,7 +81,7 @@ const MovieCard = (props: MovieCardProps) => {
                   day: "2-digit",
                   month: "short",
                   year: "numeric",
-                }).format(new Date(props.release_date))}
+                }).format(new Date(props.releaseDate))}
               </Text>
             </VStack>
           </GridItem>
