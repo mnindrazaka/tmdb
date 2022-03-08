@@ -1,35 +1,21 @@
-import React from "react";
-import { Heading } from "@chakra-ui/react";
-import { Movie, moviesApi } from "@/utils/fetcher";
+import { Box, Flex } from "@chakra-ui/react";
+import MovieCard from "@/components/MovieCard";
 
 const HomePage = () => {
-  const [loading, setLoading] = React.useState(false);
-  const [movies, setMovies] = React.useState<Movie[]>([]);
-
-  React.useEffect(() => {
-    setLoading(true);
-    moviesApi
-      .getMoviePopular({ apiKey: "11dfe233fe073aab1aaa3389310e3358" })
-      .then((res) => {
-        setMovies(res.results);
-        setLoading(false);
-      });
-  }, []);
-
   return (
-    <div>
-      {loading ? (
-        <p>loading...</p>
-      ) : (
-        movies.map((movie) => (
-          <Heading as={"h1"} key={movie.id}>
-            {movie.originalTitle}
-          </Heading>
-        ))
-      )}
-      <h1>hello world</h1>
-      <button className="btn layout">Submit</button>
-    </div>
+    <Box backgroundColor={"gray.100"} h={"100vh"}>
+      <Flex>
+        <MovieCard isLoading flex={1} m={6} />
+        <MovieCard
+          posterPath="https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg"
+          title="Euphoria"
+          releaseDate={"2021-12-15"}
+          voteCount={8569}
+          flex={1}
+          m={6}
+        />
+      </Flex>
+    </Box>
   );
 };
 
