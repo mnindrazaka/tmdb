@@ -10,14 +10,14 @@ import {
 import MovieCard from "@/components/MovieCard";
 import React from "react";
 
-interface TabsOptions {
+interface TabOption {
   key: string;
   title: string;
 }
 
 interface HeadingMovieSliderProps {
   title: string;
-  tabOptions: TabsOptions[];
+  tabOptions: TabOption[];
   onTabChange: (index: number) => void;
 }
 
@@ -42,7 +42,7 @@ const HeadingMovieSlider = ({
         borderRadius={"full"}
         border={"1px"}
         height={"8"}
-        onChange={(index) => onTabChange(index)}
+        onChange={onTabChange}
       >
         <TabList height={"full"}>
           {tabOptions.map((option) => (
@@ -64,20 +64,19 @@ interface Movie {
   voteCount: number;
 }
 
-type MovieSliderProps =
-  | { state: "loading"; tabOptions: TabsOptions[]; title: string }
+type MovieSliderProps = { tabOptions: TabOption[]; title: string } & (
+  | { state: "loading" }
   | {
       state: "error";
       message: string;
-      tabOptions: TabsOptions[];
       title: string;
     }
   | {
       state: "loaded";
       movies: Record<string, Movie[]>;
-      tabOptions: TabsOptions[];
       title: string;
-    };
+    }
+);
 
 const MovieSlider = (props: MovieSliderProps) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);

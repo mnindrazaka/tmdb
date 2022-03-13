@@ -213,9 +213,7 @@ const tabOptions = [
   { key: "onTv", title: "On TV" },
 ];
 
-const titleSlider = {
-  title: "Sedang Populer",
-};
+const title = "Sedang Populer";
 
 const HomePage = () => {
   return (
@@ -224,18 +222,14 @@ const HomePage = () => {
         state="loaded"
         movies={movies}
         tabOptions={tabOptions}
-        title={titleSlider.title}
+        title={title}
       />
-      <MovieSlider
-        state="loading"
-        tabOptions={tabOptions}
-        title={titleSlider.title}
-      />
+      <MovieSlider state="loading" tabOptions={tabOptions} title={title} />
       <MovieSlider
         state="error"
         message="Something went wrong"
         tabOptions={tabOptions}
-        title={titleSlider.title}
+        title={title}
       />
     </Box>
   );
