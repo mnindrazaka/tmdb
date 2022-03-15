@@ -69,12 +69,10 @@ type MovieSliderProps = { tabOptions: TabOption[]; title: string } & (
   | {
       state: "error";
       message: string;
-      title: string;
     }
   | {
       state: "loaded";
       movies: Record<string, Movie[]>;
-      title: string;
     }
 );
 
