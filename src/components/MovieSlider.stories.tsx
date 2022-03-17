@@ -242,5 +242,5 @@ Error.args = {
   state: "error",
   tabOptions,
   title: "Sedang Populer",
-  message: "Something when wrong",
+  message: "Something went wrong",
 };
