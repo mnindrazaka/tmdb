@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import MovieSlider from "./MovieSlider";
+import { fireEvent, waitFor, within } from "@storybook/testing-library";
 
 const movies = {
   streaming: [
@@ -228,6 +229,14 @@ Main.args = {
   movies,
   tabOptions,
   title: "Sedang Populer",
+};
+
+Main.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await waitFor(() => {
+    fireEvent.click(canvas.getByRole("tab", { name: "Streaming" }));
+    fireEvent.click(canvas.getByRole("tab", { name: "On TV" }));
+  });
 };
 
 export const Loading = Template.bind({});
