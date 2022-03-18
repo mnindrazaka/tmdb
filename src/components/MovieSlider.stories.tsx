@@ -1,11 +1,13 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import MovieSlider from "./MovieSlider";
+import { fireEvent, waitFor, within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 
 const movies = {
   streaming: [
     {
       id: 1,
-      title: "Euphoria",
+      title: "Astrophoria",
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
@@ -127,7 +129,7 @@ const movies = {
   onTv: [
     {
       id: 1,
-      title: "Hura hura",
+      title: "Mophoria",
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
@@ -228,6 +230,22 @@ Main.args = {
   movies,
   tabOptions,
   title: "Sedang Populer",
+};
+
+Main.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await waitFor(() => {
+    fireEvent.click(canvas.getByRole("tab", { name: "Streaming" }));
+    expect(
+      canvas.getByRole("heading", { name: "Astrophoria" })
+    ).toBeInTheDocument();
+  });
+  await waitFor(() => {
+    fireEvent.click(canvas.getByRole("tab", { name: "On TV" }));
+    expect(
+      canvas.getByRole("heading", { name: "Mophoria" })
+    ).toBeInTheDocument();
+  });
 };
 
 export const Loading = Template.bind({});

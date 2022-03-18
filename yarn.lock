@@ -3013,7 +3013,14 @@
   dependencies:
     lodash "^4.17.15"
 
-"@storybook/instrumenter@6.4.19", "@storybook/instrumenter@^6.4.0 || >=6.5.0-0":
+"@storybook/expect@storybook-jest":
+  version "27.5.2-0"
+  resolved "https://registry.yarnpkg.com/@storybook/expect/-/expect-27.5.2-0.tgz#131fc4336106805ccd100809a3c2852d31f1da68"
+  integrity sha512-cP99mhWN/JeCp7VSIiymvj5tmuMY050iFohvp8Zq+kewKsBSZ6/qpTJAGCCZk6pneTcp4S0Fm5BSqyxzbyJ3gw==
+  dependencies:
+    "@types/jest" ">=26.0.0"
+
+"@storybook/instrumenter@6.4.19", "@storybook/instrumenter@^6.4.0", "@storybook/instrumenter@^6.4.0 || >=6.5.0-0":
   version "6.4.19"
   resolved "https://registry.yarnpkg.com/@storybook/instrumenter/-/instrumenter-6.4.19.tgz#1586624d0315713c20f3d7b4e2c7fc595730b934"
   integrity sha512-KwOJUW7tItZw1CLffUbaSfEzH1p1HdGmJs1Q42uWGJSbXbVHZ7i7bJWYb3Lf90+yHTlqQjTr1PKAymwDwHseTA==
@@ -3022,6 +3029,16 @@
     "@storybook/client-logger" "6.4.19"
     "@storybook/core-events" "6.4.19"
     global "^4.4.0"
+
+"@storybook/jest@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@storybook/jest/-/jest-0.0.9.tgz#78efc269c12a6eb82c0c7ad0fba6c5d937a0c764"
+  integrity sha512-ilk9x+yem/w2VfvfCKtpJg+/4p53l4mu+sVDbEt0FOcUuEzcuzO+tJO6c98ccgGaiJ4Xq1pQK2BN3hQ62HJqog==
+  dependencies:
+    "@storybook/expect" storybook-jest
+    "@storybook/instrumenter" "^6.4.0"
+    "@testing-library/jest-dom" "^5.16.2"
+    jest-mock "^27.3.0"
 
 "@storybook/manager-webpack4@6.4.19":
   version "6.4.19"
@@ -3220,6 +3237,13 @@
     "@testing-library/dom" "^8.3.0"
     "@testing-library/user-event" "^13.2.1"
     ts-dedent "^2.2.0"
+
+"@storybook/testing-react@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@storybook/testing-react/-/testing-react-1.2.3.tgz#60bd835f24a7ae34733e51e087aecd158958c542"
+  integrity sha512-4KK2cdux58bO5NToGdo/Y3HQXL26CsHSo3cqbrowrIZL5JW/gcFFUbYEAwjcn+Cf2vy+FnZAKOXfCZf+j1yRdQ==
+  dependencies:
+    "@storybook/csf" "0.0.2--canary.87bc651.0"
 
 "@storybook/theming@6.4.19":
   version "6.4.19"
@@ -3530,7 +3554,7 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@*", "@types/jest@^27.4.0":
+"@types/jest@*", "@types/jest@>=26.0.0", "@types/jest@^27.4.0":
   version "27.4.1"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-27.4.1.tgz#185cbe2926eaaf9662d340cc02e548ce9e11ab6d"
   integrity sha512-23iPJADSmicDVrWk+HT58LMJtzLAnB2AgIzplQuq/bSrGaxCrlvRFjGbXmamnnk/mAmCdLStiGqggu28ocUyiw==
@@ -8917,7 +8941,7 @@ jest-message-util@^27.5.1:
     slash "^3.0.0"
     stack-utils "^2.0.3"
 
-jest-mock@^27.0.6, jest-mock@^27.5.1:
+jest-mock@^27.0.6, jest-mock@^27.3.0, jest-mock@^27.5.1:
   version "27.5.1"
   resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-27.5.1.tgz#19948336d49ef4d9c52021d34ac7b5f36ff967d6"
   integrity sha512-K4jKbY1d4ENhbrG2zuPWaQBvDly+iZ2yAW+T1fATN78hc0sInwn7wZB8XtlNnvHug5RMwV897Xm4LqmPM4e2Og==
