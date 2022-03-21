@@ -1,0 +1,71 @@
+import React from "react";
+import MovieSlider from "@/components/MovieSlider";
+import {
+  MovieSliderReducer,
+  initialState,
+  onStateChangeMovieSlider,
+} from "@/pages/MovieSliderReducer";
+
+const tabOptions = [
+  { key: "streaming", title: "Streaming" },
+  { key: "onTv", title: "On TV" },
+];
+
+const title = "Sedang Populer";
+
+const MovieSliderContainer = () => {
+  const [movieState, sendMovie] = React.useReducer(
+    MovieSliderReducer,
+    initialState
+  );
+
+  React.useEffect(() => {
+    onStateChangeMovieSlider(movieState, sendMovie);
+  }, [movieState]);
+
+  if (movieState.states === "Idle" || movieState.states === "FetchingMovie") {
+    return (
+      <MovieSlider tabOptions={tabOptions} title={title} state="loading" />
+    );
+  }
+
+  if (movieState.states === "ShowingMovie") {
+    return (
+      <MovieSlider
+        tabOptions={tabOptions}
+        title={title}
+        state="loaded"
+        movies={{
+          streaming: movieState.data.streaming.map((movie) => ({
+            id: movie.id,
+            posterPath: movie.poster_path ?? "",
+            title: movie.title,
+            releaseDate: movie.release_date,
+            voteCount: movie.vote_count,
+          })),
+          onTv: movieState.data.onTv.map((movie) => ({
+            id: movie.id,
+            posterPath: movie.poster_path ?? "",
+            title: movie.name,
+            releaseDate: movie.first_air_date,
+            voteCount: movie.vote_count,
+          })),
+        }}
+      />
+    );
+  }
+
+  if (movieState.states === "Error") {
+    return (
+      <MovieSlider
+        tabOptions={tabOptions}
+        title={title}
+        state="error"
+        message={movieState.error ?? ""}
+      />
+    );
+  }
+  return null;
+};
+
+export default MovieSliderContainer;
