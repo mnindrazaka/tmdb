@@ -22,13 +22,34 @@ paths:
           content:
             "application/json":
               schema:
-                $ref: "#/components/schemas/MoviePopular"
+                $ref: "#/components/schemas/MovieStreamingPopular"
+        "404":
+          description: Movie not found
+  /tv/popular:
+    get:
+      description: Returns all popular movies
+      tags: ["Movies"]
+      operationId: "getMovieTvPopular"
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: The api key
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/MovieTvPopular"
         "404":
           description: Movie not found
 
 components:
   schemas:
-    MoviePopular:
+    MovieStreamingPopular:
       type: "object"
       "required":
         - "page"
@@ -37,12 +58,12 @@ components:
         page:
           type: "number"
         results:
-          $ref: "#/components/MovieList"
-    MovieList:
+          $ref: "#/components/MovieStreamingList"
+    MovieStreamingList:
       type: "array"
       items:
-        $ref: "#/components/Movie"
-    Movie:
+        $ref: "#/components/MovieStreaming"
+    MovieStreaming:
       type: "object"
       required:
         - "id"
@@ -84,6 +105,68 @@ components:
           type: "string"
         video:
           type: "boolean"
+        vote_average:
+          type: "integer"
+        vote_count:
+          type: "integer"
+    MovieTvPopular:
+      type: "object"
+      "required":
+        - "page"
+        - "results"
+      properties:
+        page:
+          type: "number"
+        results:
+          $ref: "#/components/MovieTvList"
+    MovieTvList:
+      type: "array"
+      items:
+        $ref: "#/components/MovieTv"
+    MovieTv:
+      type: "object"
+      required:
+        - "id"
+        - "first_air_date"
+        - "genre_ids"
+        - "name"
+        - "origin_country"
+        - "original_language"
+        - "original_name"
+        - "overview"
+        - "popularity"
+        - "release_date"
+        - "title"
+        - "video"
+        - "vote_average"
+        - "vote_count"
+      properties:
+        backdrop_path:
+          type: "integer"
+        first_air_date:
+          type: "string"
+        genre_ids":
+          type: "array"
+          items:
+            type: "integer"
+        id:
+          type: "integer"
+        name:
+          type: "string"
+        origin_country:
+          type: "array"
+          items:
+            type: "string"
+        original_language:
+          type: "string"
+        original_name:
+          type: "string"
+        overview:
+          type: "string"
+        popularity:
+          type: "integer"
+        poster_path:
+          type: "string"
         vote_average:
           type: "integer"
         vote_count:
