@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "gen:type": "rm -rf src/__generated__/api; openapi-generator-cli generate -i ./api.yaml -o src/__generated__/api -g typescript-fetch --additional-properties=supportsES6=true,npmVersion=6.9.0,typescriptThreePlus=true",
+    "gen:type": "rm -rf src/__generated__/api; openapi-generator-cli generate -i ./api.yaml -o src/__generated__/api -g typescript-fetch --additional-properties=supportsES6=true,modelPropertyNaming=snake_case,npmVersion=6.9.0,typescriptThreePlus=true",
     "dev": "yarn gen:type && webpack serve --config webpack.config.js",
     "build": "webpack --config webpack.config.js",
     "test": "yarn gen:type && jest",
@@ -22,6 +22,7 @@
     "@openapitools/openapi-generator-cli": "^2.4.26",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
+    "axios": "^0.26.1",
     "express": "^4.17.2",
     "framer-motion": "^6",
     "react": "^17.0.2",
