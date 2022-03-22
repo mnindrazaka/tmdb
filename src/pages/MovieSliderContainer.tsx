@@ -38,14 +38,14 @@ const MovieSliderContainer = () => {
         movies={{
           streaming: movieState.data.streaming.map((movie) => ({
             id: movie.id,
-            posterPath: movie.poster_path ?? "",
+            posterPath: `https://image.tmdb.org/t/p/original/${movie.poster_path}`,
             title: movie.title,
             releaseDate: movie.release_date,
             voteCount: movie.vote_count,
           })),
           onTv: movieState.data.onTv.map((movie) => ({
             id: movie.id,
-            posterPath: movie.poster_path ?? "",
+            posterPath: `https://image.tmdb.org/t/p/original/${movie.poster_path}`,
             title: movie.name,
             releaseDate: movie.first_air_date,
             voteCount: movie.vote_count,

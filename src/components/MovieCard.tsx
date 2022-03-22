@@ -53,12 +53,7 @@ const MovieCard = (props: MovieCardProps) => {
         </Box>
       ) : (
         <Box rounded={8} boxShadow={"base"}>
-          <Image
-            src={`https://image.tmdb.org/t/p/original/${props.posterPath}`}
-            h={"52"}
-            w={"full"}
-            roundedTop={8}
-          />
+          <Image src={props.posterPath} h={"52"} w={"full"} roundedTop={8} />
           <CircularProgress
             value={props.voteCount / 100}
             color="green.500"
