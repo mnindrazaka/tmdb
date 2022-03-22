@@ -57,7 +57,7 @@ const PopularMovieSlider = () => {
         tabOptions={tabOptions}
         title={title}
         state="error"
-        message={movieState.error ?? ""}
+        message={movieState.message ?? ""}
       />
     );
   }

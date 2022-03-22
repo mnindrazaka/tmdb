@@ -12,7 +12,7 @@ export namespace State {
           onTv: MovieTvPopular["results"];
         };
       }
-    | { tag: "error"; error: string };
+    | { tag: "error"; message: string };
 
   export const onChange = (
     state: State.t,
@@ -35,14 +35,14 @@ export namespace State {
           .then(([resStreaming, resOnTv]) =>
             dispatch({
               tag: "fetchMovieSuccess",
-              payload: {
+              data: {
                 streaming: resStreaming.data.results,
                 onTv: resOnTv.data.results,
               },
             })
           )
           .catch((err) =>
-            dispatch({ tag: "fetchMovieError", payload: err.message })
+            dispatch({ tag: "fetchMovieError", message: err.message })
           );
         break;
       case "showingMovie":
@@ -64,12 +64,12 @@ export namespace Action {
     | { tag: "fetcMovie" }
     | {
         tag: "fetchMovieSuccess";
-        payload: {
+        data: {
           streaming: MovieStreamingPopular["results"];
           onTv: MovieTvPopular["results"];
         };
       }
-    | { tag: "fetchMovieError"; payload: string };
+    | { tag: "fetchMovieError"; message: string };
 }
 
 export const make = (prevState: State.t, action: Action.t): State.t => {
@@ -91,15 +91,15 @@ export const make = (prevState: State.t, action: Action.t): State.t => {
             ...prevState,
             tag: "showingMovie",
             data: {
-              streaming: action.payload.streaming,
-              onTv: action.payload.onTv,
+              streaming: action.data.streaming,
+              onTv: action.data.onTv,
             },
           };
         case "fetchMovieError":
           return {
             ...prevState,
             tag: "error",
-            error: action.payload,
+            message: action.message,
           };
         default:
           return prevState;
