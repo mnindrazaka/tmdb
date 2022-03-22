@@ -1,10 +1,6 @@
 import React from "react";
 import MovieSlider from "@/components/MovieSlider";
-import {
-  MovieSliderReducer,
-  initialState,
-  onStateChangeMovieSlider,
-} from "@/pages/MovieSliderReducer";
+import * as MovieSliderReducer from "@/pages/Home/PopularMovieSlider/PopularMovieSlider.reducer";
 
 const tabOptions = [
   { key: "streaming", title: "Streaming" },
@@ -13,14 +9,14 @@ const tabOptions = [
 
 const title = "Sedang Populer";
 
-const MovieSliderContainer = () => {
+const PopularMovieSlider = () => {
   const [movieState, sendMovie] = React.useReducer(
-    MovieSliderReducer,
-    initialState
+    MovieSliderReducer.make,
+    MovieSliderReducer.State.make()
   );
 
   React.useEffect(() => {
-    onStateChangeMovieSlider(movieState, sendMovie);
+    MovieSliderReducer.State.onChange(movieState, sendMovie);
   }, [movieState]);
 
   if (movieState.tag === "idle" || movieState.tag === "fetchingMovie") {
@@ -68,4 +64,4 @@ const MovieSliderContainer = () => {
   return null;
 };
 
-export default MovieSliderContainer;
+export default PopularMovieSlider;
