@@ -2,16 +2,16 @@ import axios from "axios";
 import { MovieStreamingPopular, MovieTvPopular } from "@/__generated__/api";
 
 type State =
-  | { states: "Idle" }
-  | { states: "FetchingMovie" }
+  | { tag: "idle" }
+  | { tag: "fetchingMovie" }
   | {
-      states: "ShowingMovie";
+      tag: "showingMovie";
       data: {
         streaming: MovieStreamingPopular["results"];
         onTv: MovieTvPopular["results"];
       };
     }
-  | { states: "Error"; error: string };
+  | { tag: "error"; error: string };
 
 type Action =
   | { type: "FetcMovie" }
@@ -25,18 +25,18 @@ type Action =
   | { type: "FetchMovieError"; payload: string };
 
 export const initialState: State = {
-  states: "Idle",
+  tag: "idle",
 };
 
 export const onStateChangeMovieSlider = (
   state: State,
   sendMovie: (action: Action) => void
 ) => {
-  switch (state.states) {
-    case "Idle":
+  switch (state.tag) {
+    case "idle":
       sendMovie({ type: "FetcMovie" });
       break;
-    case "FetchingMovie":
+    case "fetchingMovie":
       const promiseStreaming = axios.get<MovieStreamingPopular>(
         "https://api.themoviedb.org/3/movie/popular?api_key=11dfe233fe073aab1aaa3389310e3358"
       );
@@ -59,9 +59,9 @@ export const onStateChangeMovieSlider = (
           sendMovie({ type: "FetchMovieError", payload: err.message })
         );
       break;
-    case "ShowingMovie":
+    case "showingMovie":
       break;
-    case "Error":
+    case "error":
       break;
     default:
       return state;
@@ -69,23 +69,23 @@ export const onStateChangeMovieSlider = (
 };
 
 export const MovieSliderReducer = (prevState: State, action: Action): State => {
-  switch (prevState.states) {
-    case "Idle":
+  switch (prevState.tag) {
+    case "idle":
       switch (action.type) {
         case "FetcMovie":
           return {
             ...prevState,
-            states: "FetchingMovie",
+            tag: "fetchingMovie",
           };
         default:
           return prevState;
       }
-    case "FetchingMovie":
+    case "fetchingMovie":
       switch (action.type) {
         case "FetchMovieSuccess":
           return {
             ...prevState,
-            states: "ShowingMovie",
+            tag: "showingMovie",
             data: {
               streaming: action.payload.streaming,
               onTv: action.payload.onTv,
@@ -94,15 +94,15 @@ export const MovieSliderReducer = (prevState: State, action: Action): State => {
         case "FetchMovieError":
           return {
             ...prevState,
-            states: "Error",
+            tag: "error",
             error: action.payload,
           };
         default:
           return prevState;
       }
-    case "Error":
+    case "error":
       return prevState;
-    case "ShowingMovie":
+    case "showingMovie":
       return prevState;
     default:
       const exhaustiveCheck: never = prevState;

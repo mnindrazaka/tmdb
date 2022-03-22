@@ -23,13 +23,13 @@ const MovieSliderContainer = () => {
     onStateChangeMovieSlider(movieState, sendMovie);
   }, [movieState]);
 
-  if (movieState.states === "Idle" || movieState.states === "FetchingMovie") {
+  if (movieState.tag === "idle" || movieState.tag === "fetchingMovie") {
     return (
       <MovieSlider tabOptions={tabOptions} title={title} state="loading" />
     );
   }
 
-  if (movieState.states === "ShowingMovie") {
+  if (movieState.tag === "showingMovie") {
     return (
       <MovieSlider
         tabOptions={tabOptions}
@@ -55,7 +55,7 @@ const MovieSliderContainer = () => {
     );
   }
 
-  if (movieState.states === "Error") {
+  if (movieState.tag === "error") {
     return (
       <MovieSlider
         tabOptions={tabOptions}
