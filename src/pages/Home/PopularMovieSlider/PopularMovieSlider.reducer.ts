@@ -20,7 +20,7 @@ export namespace State {
   ) => {
     switch (state.tag) {
       case "idle":
-        dispatch({ type: "FetcMovie" });
+        dispatch({ tag: "fetcMovie" });
         break;
       case "fetchingMovie":
         const promiseStreaming = axios.get<MovieStreamingPopular>(
@@ -34,7 +34,7 @@ export namespace State {
         Promise.all([promiseStreaming, promiseOnTv])
           .then(([resStreaming, resOnTv]) =>
             dispatch({
-              type: "FetchMovieSuccess",
+              tag: "fetchMovieSuccess",
               payload: {
                 streaming: resStreaming.data.results,
                 onTv: resOnTv.data.results,
@@ -42,7 +42,7 @@ export namespace State {
             })
           )
           .catch((err) =>
-            dispatch({ type: "FetchMovieError", payload: err.message })
+            dispatch({ tag: "fetchMovieError", payload: err.message })
           );
         break;
       case "showingMovie":
@@ -61,22 +61,22 @@ export namespace State {
 
 export namespace Action {
   export type t =
-    | { type: "FetcMovie" }
+    | { tag: "fetcMovie" }
     | {
-        type: "FetchMovieSuccess";
+        tag: "fetchMovieSuccess";
         payload: {
           streaming: MovieStreamingPopular["results"];
           onTv: MovieTvPopular["results"];
         };
       }
-    | { type: "FetchMovieError"; payload: string };
+    | { tag: "fetchMovieError"; payload: string };
 }
 
 export const make = (prevState: State.t, action: Action.t): State.t => {
   switch (prevState.tag) {
     case "idle":
-      switch (action.type) {
-        case "FetcMovie":
+      switch (action.tag) {
+        case "fetcMovie":
           return {
             ...prevState,
             tag: "fetchingMovie",
@@ -85,8 +85,8 @@ export const make = (prevState: State.t, action: Action.t): State.t => {
           return prevState;
       }
     case "fetchingMovie":
-      switch (action.type) {
-        case "FetchMovieSuccess":
+      switch (action.tag) {
+        case "fetchMovieSuccess":
           return {
             ...prevState,
             tag: "showingMovie",
@@ -95,7 +95,7 @@ export const make = (prevState: State.t, action: Action.t): State.t => {
               onTv: action.payload.onTv,
             },
           };
-        case "FetchMovieError":
+        case "fetchMovieError":
           return {
             ...prevState,
             tag: "error",

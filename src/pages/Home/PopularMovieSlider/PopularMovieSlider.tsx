@@ -10,13 +10,13 @@ const tabOptions = [
 const title = "Sedang Populer";
 
 const PopularMovieSlider = () => {
-  const [movieState, sendMovie] = React.useReducer(
+  const [movieState, dispatch] = React.useReducer(
     MovieSliderReducer.make,
     MovieSliderReducer.State.make()
   );
 
   React.useEffect(() => {
-    MovieSliderReducer.State.onChange(movieState, sendMovie);
+    MovieSliderReducer.State.onChange(movieState, dispatch);
   }, [movieState]);
 
   if (movieState.tag === "idle" || movieState.tag === "fetchingMovie") {
