@@ -2,12 +2,12 @@ import React from "react";
 import MovieSlider from "@/components/MovieSlider";
 import * as MovieSliderReducer from "@/pages/Home/PopularMovieSlider/PopularMovieSlider.reducer";
 
-const tabOptions = [
+export const tabOptions = [
   { key: "streaming", title: "Streaming" },
   { key: "onTv", title: "On TV" },
 ];
 
-const title = "Sedang Populer";
+export const title = "Sedang Populer";
 
 const PopularMovieSlider = () => {
   const [movieState, dispatch] = React.useReducer(

@@ -29,4 +29,31 @@ export const handlers = [
         })
       );
   }),
+  rest.get("https://api.themoviedb.org/3/tv/popular", (req, res, ctx) => {
+    const apiKey = req.url.searchParams.get("api_key");
+    if (apiKey)
+      return res(
+        ctx.status(200),
+        ctx.json({
+          results: [
+            {
+              backdrop_path: "/wvdWb5kTQipdMDqCclC6Y3zr4j3.jpg",
+              first_air_date: "2010-10-31",
+              genre_ids: [10759, 18, 10765],
+              id: 1402,
+              name: "The Walking Dead",
+              origin_country: ["US"],
+              original_language: "en",
+              original_name: "The Walking Dead",
+              overview:
+                "Sheriff's deputy Rick Grimes awakens from a coma to find a post-apocalyptic world dominated by flesh-eating zombies. He sets out to find his family and encounters many other survivors along the way.",
+              popularity: 1448.847,
+              poster_path: "/xf9wuDcqlUPWABZNeDKPbZUjWx0.jpg",
+              vote_average: 8.1,
+              vote_count: 12754,
+            },
+          ],
+        })
+      );
+  }),
 ];
