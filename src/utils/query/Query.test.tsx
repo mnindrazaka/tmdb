@@ -107,7 +107,7 @@ it("can get existing state from cache", async () => {
   const { result } = renderHook(
     () => Query.useQuery<string[]>("test", fetchData),
     {
-      wrapper,
+      wrapper
     }
   );
 

@@ -4,7 +4,7 @@ import * as MovieSliderReducer from "@/pages/Home/PopularMovieSlider/PopularMovi
 
 const tabOptions = [
   { key: "streaming", title: "Streaming" },
-  { key: "onTv", title: "On TV" },
+  { key: "onTv", title: "On TV" }
 ];
 
 const title = "Sedang Populer";
@@ -37,15 +37,15 @@ const PopularMovieSlider = () => {
             posterPath: `https://image.tmdb.org/t/p/original/${movie.poster_path}`,
             title: movie.title,
             releaseDate: movie.release_date,
-            voteCount: movie.vote_count,
+            voteCount: movie.vote_count
           })),
           onTv: movieState.data.onTv.map((movie) => ({
             id: movie.id,
             posterPath: `https://image.tmdb.org/t/p/original/${movie.poster_path}`,
             title: movie.name,
             releaseDate: movie.first_air_date,
-            voteCount: movie.vote_count,
-          })),
+            voteCount: movie.vote_count
+          }))
         }}
       />
     );

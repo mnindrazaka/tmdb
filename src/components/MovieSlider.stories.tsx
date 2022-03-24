@@ -11,7 +11,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 2,
@@ -19,7 +19,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 4,
@@ -35,7 +35,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 5,
@@ -43,7 +43,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 6,
@@ -51,7 +51,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 7,
@@ -59,7 +59,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 8,
@@ -67,7 +67,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 9,
@@ -75,7 +75,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 10,
@@ -83,7 +83,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 11,
@@ -91,7 +91,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 12,
@@ -99,7 +99,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 13,
@@ -107,7 +107,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 14,
@@ -115,7 +115,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 15,
@@ -123,8 +123,8 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
-    },
+      voteCount: 8569
+    }
   ],
   onTv: [
     {
@@ -133,7 +133,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 2,
@@ -141,7 +141,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 3,
@@ -149,7 +149,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 4,
@@ -157,7 +157,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 5,
@@ -165,7 +165,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 6,
@@ -173,7 +173,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 7,
@@ -181,7 +181,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 8,
@@ -189,7 +189,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 9,
@@ -197,7 +197,7 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
+      voteCount: 8569
     },
     {
       id: 10,
@@ -205,19 +205,19 @@ const movies = {
       posterPath:
         "https://www.themoviedb.org/t/p/w220_and_h330_face/3Q0hd3heuWwDWpwcDkhQOA6TYWI.jpg",
       releaseDate: "2021-12-15",
-      voteCount: 8569,
-    },
-  ],
+      voteCount: 8569
+    }
+  ]
 };
 
 const tabOptions = [
   { key: "streaming", title: "Streaming" },
-  { key: "onTv", title: "On TV" },
+  { key: "onTv", title: "On TV" }
 ];
 
 export default {
   title: "Components/MovieSlider",
-  component: MovieSlider,
+  component: MovieSlider
 } as ComponentMeta<typeof MovieSlider>;
 
 const Template: ComponentStory<typeof MovieSlider> = (args) => (
@@ -229,7 +229,7 @@ Main.args = {
   state: "loaded",
   movies,
   tabOptions,
-  title: "Sedang Populer",
+  title: "Sedang Populer"
 };
 
 Main.play = async ({ canvasElement }) => {
@@ -252,7 +252,7 @@ export const Loading = Template.bind({});
 Loading.args = {
   state: "loading",
   tabOptions,
-  title: "Sedang Populer",
+  title: "Sedang Populer"
 };
 
 export const Error = Template.bind({});
@@ -260,5 +260,5 @@ Error.args = {
   state: "error",
   tabOptions,
   title: "Sedang Populer",
-  message: "Something went wrong",
+  message: "Something went wrong"
 };

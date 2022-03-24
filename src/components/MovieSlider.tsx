@@ -5,7 +5,7 @@ import {
   Stack,
   Tab,
   TabList,
-  Tabs,
+  Tabs
 } from "@chakra-ui/react";
 import MovieCard from "@/components/MovieCard";
 import React from "react";
@@ -24,7 +24,7 @@ interface HeadingMovieSliderProps {
 const HeadingMovieSlider = ({
   title,
   tabOptions,
-  onTabChange,
+  onTabChange
 }: HeadingMovieSliderProps) => {
   return (
     <Stack

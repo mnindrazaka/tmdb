@@ -9,7 +9,7 @@ import {
   Flex,
   BoxProps,
   Stack,
-  Skeleton,
+  Skeleton
 } from "@chakra-ui/react";
 
 type MovieCardProps = (
@@ -77,7 +77,7 @@ const MovieCard = (props: MovieCardProps) => {
               {new Intl.DateTimeFormat("en-US", {
                 day: "2-digit",
                 month: "short",
-                year: "numeric",
+                year: "numeric"
               }).format(new Date(props.releaseDate))}
             </Text>
           </VStack>

@@ -10,7 +10,7 @@ export namespace Store {
     state: QueryReducer.State.t<any>
   ): t => ({
     ...store,
-    [key]: state,
+    [key]: state
   });
 
   export const make = (): t => ({});
@@ -24,7 +24,7 @@ export namespace Value {
 
   export const make = (): Value.t => ({
     store: Store.make(),
-    updateStore: () => {},
+    updateStore: () => {}
   });
 }
 
@@ -41,7 +41,7 @@ export type Props = {
 
 export const Provider: React.FunctionComponent<Props> = ({
   initialStore,
-  children,
+  children
 }) => {
   const [store, setStore] = React.useState(initialStore ?? Value.make().store);
 

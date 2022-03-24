@@ -12,7 +12,8 @@
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.1.7",
@@ -59,6 +60,7 @@
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.5.1",
     "msw": "^0.38.1",
+    "prettier": "2.6.0",
     "style-loader": "^3.3.1",
     "tsconfig-paths-webpack-plugin": "^3.5.2",
     "typescript": "^4.5.5",

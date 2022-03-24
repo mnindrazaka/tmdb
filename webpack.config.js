@@ -8,18 +8,18 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "./build"),
     filename: "[name].[contenthash].js",
-    clean: true,
+    clean: true
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
     preferRelative: true,
     alias: {
-      "@/*": path.resolve(__dirname, "src/**"),
+      "@/*": path.resolve(__dirname, "src/**")
     },
-    plugins: [new TsconfigPathsPlugin({})],
+    plugins: [new TsconfigPathsPlugin({})]
   },
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: true
   },
   module: {
     rules: [
@@ -28,26 +28,26 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: "babel-loader",
-          },
-        ],
+            loader: "babel-loader"
+          }
+        ]
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: ["style-loader", "css-loader"]
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)/i,
         type: "asset/resource",
         generator: {
-          filename: "assets/img/[hash][ext][query]",
-        },
-      },
-    ],
+          filename: "assets/img/[hash][ext][query]"
+        }
+      }
+    ]
   },
   plugins: [
     new htmlWebpackPlugin({
-      template: path.resolve(__dirname, "./public/index.html"),
-    }),
-  ],
+      template: path.resolve(__dirname, "./public/index.html")
+    })
+  ]
 };
