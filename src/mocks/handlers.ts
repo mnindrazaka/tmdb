@@ -21,9 +21,9 @@ export const handlers = [
             title: "Spider-Man: No Way Home",
             video: false,
             vote_average: 8.3,
-            vote_count: 8569,
-          },
-        ],
+            vote_count: 8569
+          }
+        ]
       })
     );
   }),
@@ -46,10 +46,10 @@ export const handlers = [
             popularity: 1448.847,
             poster_path: "/xf9wuDcqlUPWABZNeDKPbZUjWx0.jpg",
             vote_average: 8.1,
-            vote_count: 12754,
-          },
-        ],
+            vote_count: 12754
+          }
+        ]
       })
     );
-  }),
+  })
 ];

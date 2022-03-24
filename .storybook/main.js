@@ -6,7 +6,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    "@chakra-ui/storybook-addon",
+    "@chakra-ui/storybook-addon"
   ],
   framework: "@storybook/react",
   typescript: {
@@ -16,18 +16,18 @@ module.exports = {
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
       propFilter: (prop) =>
-        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
-    },
+        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true
+    }
   },
   webpackFinal: async (config) => {
     config.module.rules.push({
       test: /\.mjs$/,
       include: /node_modules/,
-      type: "javascript/auto",
+      type: "javascript/auto"
     });
 
     config.resolve.plugins.push(new TsconfigPathsPlugin());
 
     return config;
-  },
+  }
 };

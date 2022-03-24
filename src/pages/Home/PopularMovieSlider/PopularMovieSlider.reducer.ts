@@ -37,8 +37,8 @@ export namespace State {
               tag: "fetchMovieSuccess",
               data: {
                 streaming: resStreaming.data.results,
-                onTv: resOnTv.data.results,
-              },
+                onTv: resOnTv.data.results
+              }
             })
           )
           .catch((err) =>
@@ -79,7 +79,7 @@ export const make = (prevState: State.t, action: Action.t): State.t => {
         case "fetcMovie":
           return {
             ...prevState,
-            tag: "fetchingMovie",
+            tag: "fetchingMovie"
           };
         default:
           return prevState;
@@ -92,14 +92,14 @@ export const make = (prevState: State.t, action: Action.t): State.t => {
             tag: "showingMovie",
             data: {
               streaming: action.data.streaming,
-              onTv: action.data.onTv,
-            },
+              onTv: action.data.onTv
+            }
           };
         case "fetchMovieError":
           return {
             ...prevState,
             tag: "error",
-            message: action.message,
+            message: action.message
           };
         default:
           return prevState;
