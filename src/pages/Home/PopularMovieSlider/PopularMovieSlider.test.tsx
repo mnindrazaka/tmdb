@@ -1,3 +1,5 @@
+import { server } from "@/mocks/server";
+import { rest } from "msw";
 import {
   render,
   screen,
@@ -6,30 +8,30 @@ import {
 import PopularMovieSlider from "@/pages/Home/PopularMovieSlider";
 import {
   title,
-  tabOptions,
+  tabOptionsStreaming,
+  tabOptionsOnTv,
 } from "@/pages/Home/PopularMovieSlider/PopularMovieSlider";
-import { server } from "@/mocks/server";
-import { rest } from "msw";
+import { loadingText } from "@/components/MovieCard";
 
-const titleSlider = () => screen.getByRole("heading", { name: title });
-const tabStreaming = () =>
-  screen.getByRole("tab", { name: tabOptions[0].title });
-const tabOnTv = () => screen.getByRole("tab", { name: tabOptions[1].title });
-const titleMovieLoading = () => screen.getAllByText("NR")[0];
-
-test("should have list of card loading variant", () => {
+const renderPopularMovieSlider = async () => {
   render(<PopularMovieSlider />);
 
-  expect(titleSlider()).toBeInTheDocument();
-  expect(tabStreaming()).toBeInTheDocument();
-  expect(tabOnTv()).toBeInTheDocument();
-  expect(titleMovieLoading()).toBeInTheDocument();
-});
+  await waitForElementToBeRemoved(() => screen.getAllByText(loadingText)[0]);
+
+  const titleSlider = screen.getByRole("heading", { name: title });
+  const tabStreaming = screen.getByRole("tab", {
+    name: tabOptionsStreaming.title,
+  });
+  const tabOnTv = screen.getByRole("tab", { name: tabOptionsOnTv.title });
+  expect(titleSlider).toBeInTheDocument();
+  expect(tabStreaming).toBeInTheDocument();
+  expect(tabOnTv).toBeInTheDocument();
+
+  return { titleSlider, tabStreaming, tabOnTv };
+};
 
 test("should have list of card main variant", async () => {
-  render(<PopularMovieSlider />);
-
-  await waitForElementToBeRemoved(() => screen.getAllByText("NR")[0]);
+  await renderPopularMovieSlider();
 
   const titleMovie = screen.getByRole("heading", {
     name: "Spider-Man: No Way Home",
@@ -42,14 +44,13 @@ test("should have list of card main variant", async () => {
   }).format(new Date("2021-12-15"));
   const releaseDateMovie = screen.getByText(formatDate);
 
-  expect(titleSlider()).toBeInTheDocument();
-  expect(tabStreaming()).toBeInTheDocument();
-  expect(tabOnTv()).toBeInTheDocument();
   expect(titleMovie).toBeInTheDocument();
   expect(releaseDateMovie).toBeInTheDocument();
 });
 
 test("should have a message error in error variant", async () => {
+  const errorMessage = "Request failed with status code 403";
+
   server.use(
     rest.get("https://api.themoviedb.org/3/movie/popular", (req, res, ctx) => {
       const apiKey = req.url.searchParams.get("api_key");
@@ -57,17 +58,15 @@ test("should have a message error in error variant", async () => {
         return res(
           ctx.status(403),
           ctx.json({
-            message: "Request failed with status code 403",
+            message: errorMessage,
           })
         );
     })
   );
-  render(<PopularMovieSlider />);
-
-  await waitForElementToBeRemoved(() => screen.getAllByText("NR")[0]);
+  await renderPopularMovieSlider();
 
   const message = screen.getByRole("heading", {
-    name: "Request failed with status code 403",
+    name: errorMessage,
   });
 
   expect(message).toBeInTheDocument();

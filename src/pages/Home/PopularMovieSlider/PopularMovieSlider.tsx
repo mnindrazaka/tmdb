@@ -2,10 +2,9 @@ import React from "react";
 import MovieSlider from "@/components/MovieSlider";
 import * as MovieSliderReducer from "@/pages/Home/PopularMovieSlider/PopularMovieSlider.reducer";
 
-export const tabOptions = [
-  { key: "streaming", title: "Streaming" },
-  { key: "onTv", title: "On TV" },
-];
+export const tabOptionsStreaming = { key: "streaming", title: "Streaming" };
+export const tabOptionsOnTv = { key: "onTv", title: "On TV" };
+const tabOptions = [tabOptionsStreaming, tabOptionsOnTv];
 
 export const title = "Sedang Populer";
 

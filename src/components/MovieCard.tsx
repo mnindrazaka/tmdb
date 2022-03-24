@@ -24,6 +24,8 @@ type MovieCardProps = (
 ) &
   BoxProps;
 
+export const loadingText = "NR";
+
 const MovieCard = (props: MovieCardProps) => {
   const { isLoading, ...boxProps } = props;
 
@@ -44,7 +46,7 @@ const MovieCard = (props: MovieCardProps) => {
             bottom={"6"}
             right={0}
           >
-            <Text color={"white"}>NR</Text>
+            <Text color={"white"}>{loadingText}</Text>
           </Flex>
           <Stack p={4}>
             <Skeleton height="12px" />
