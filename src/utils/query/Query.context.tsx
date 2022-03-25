@@ -1,5 +1,5 @@
 import React from "react";
-import * as QueryReducer from "@/utils/query/QueryReducer";
+import * as QueryReducer from "@/utils/query/Query.reducer";
 
 export namespace Store {
   export type t = Record<string, QueryReducer.State.t<any>>;

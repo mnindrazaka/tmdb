@@ -1,5 +1,5 @@
 import * as Query from "@/utils/query/Query";
-import * as QueryContext from "@/utils/query/QueryContext";
+import * as QueryContext from "@/utils/query/Query.context";
 
 export namespace State {
   export type t<T> =

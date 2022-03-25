@@ -3,13 +3,13 @@ import { rest } from "msw";
 import {
   render,
   screen,
-  waitForElementToBeRemoved,
+  waitForElementToBeRemoved
 } from "@testing-library/react";
 import PopularMovieSlider from "@/pages/Home/PopularMovieSlider";
 import {
   title,
   tabOptionsStreaming,
-  tabOptionsOnTv,
+  tabOptionsOnTv
 } from "@/pages/Home/PopularMovieSlider/PopularMovieSlider";
 import { loadingText } from "@/components/MovieCard";
 
@@ -20,7 +20,7 @@ const renderPopularMovieSlider = async () => {
 
   const titleSlider = screen.getByRole("heading", { name: title });
   const tabStreaming = screen.getByRole("tab", {
-    name: tabOptionsStreaming.title,
+    name: tabOptionsStreaming.title
   });
   const tabOnTv = screen.getByRole("tab", { name: tabOptionsOnTv.title });
   expect(titleSlider).toBeInTheDocument();
@@ -34,13 +34,13 @@ test("should have list of card main variant", async () => {
   await renderPopularMovieSlider();
 
   const titleMovie = screen.getByRole("heading", {
-    name: "Spider-Man: No Way Home",
+    name: "Spider-Man: No Way Home"
   });
 
   const formatDate = new Intl.DateTimeFormat("en-US", {
     day: "2-digit",
     month: "short",
-    year: "numeric",
+    year: "numeric"
   }).format(new Date("2021-12-15"));
   const releaseDateMovie = screen.getByText(formatDate);
 
@@ -58,7 +58,7 @@ test("should have a message error in error variant", async () => {
         return res(
           ctx.status(403),
           ctx.json({
-            message: errorMessage,
+            message: errorMessage
           })
         );
     })
@@ -66,7 +66,7 @@ test("should have a message error in error variant", async () => {
   await renderPopularMovieSlider();
 
   const message = screen.getByRole("heading", {
-    name: errorMessage,
+    name: errorMessage
   });
 
   expect(message).toBeInTheDocument();
