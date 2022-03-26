@@ -1,6 +1,8 @@
 import React from "react";
 import MovieSlider from "@/components/MovieSlider";
 import * as MovieSliderReducer from "@/pages/Home/PopularMovieSlider/PopularMovieSlider.reducer";
+import { useQuery } from "@/utils/query";
+import { moviesApi } from "@/utils/fetcher";
 
 export const tabOptionsStreaming = { key: "streaming", title: "Streaming" };
 export const tabOptionsOnTv = { key: "onTv", title: "On TV" };
@@ -14,9 +16,45 @@ const PopularMovieSlider = () => {
     MovieSliderReducer.State.make()
   );
 
+  const {
+    state: fetchMoviesStreamingPopularState,
+    refetch: fetchMoviesStreamingPopular
+  } = useQuery(
+    "popularStreamingMovies",
+    () =>
+      moviesApi.getMoviePopular({
+        apiKey: "11dfe233fe073aab1aaa3389310e3358"
+      }),
+    { lazy: true }
+  );
+
+  const { state: fetchMoviesTvPopularState, refetch: fetchMoviesTvPopular } =
+    useQuery(
+      "popularTvMovies",
+      () =>
+        moviesApi.getMovieTvPopular({
+          apiKey: "11dfe233fe073aab1aaa3389310e3358"
+        }),
+      { lazy: true }
+    );
+
   React.useEffect(() => {
-    MovieSliderReducer.State.onChange(movieState, dispatch);
-  }, [movieState]);
+    MovieSliderReducer.State.onChange({
+      state: movieState,
+      dispatch,
+      fetchMoviesStreamingPopularState,
+      fetchMoviesStreamingPopular,
+      fetchMoviesTvPopularState,
+      fetchMoviesTvPopular
+    });
+  }, [
+    movieState,
+    dispatch,
+    fetchMoviesStreamingPopularState,
+    fetchMoviesStreamingPopular,
+    fetchMoviesTvPopularState,
+    fetchMoviesTvPopular
+  ]);
 
   if (movieState.tag === "idle" || movieState.tag === "fetchingMovie") {
     return (

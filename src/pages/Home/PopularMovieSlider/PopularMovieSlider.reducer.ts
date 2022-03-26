@@ -1,5 +1,5 @@
-import axios from "axios";
 import { MovieStreamingPopular, MovieTvPopular } from "@/__generated__/api";
+import * as Query from "@/utils/query";
 
 export namespace State {
   export type t =
@@ -14,36 +14,62 @@ export namespace State {
       }
     | { tag: "error"; message: string };
 
-  export const onChange = (
-    state: State.t,
-    dispatch: (action: Action.t) => void
-  ) => {
+  type onChangeParams = {
+    state: State.t;
+    dispatch: (action: Action.t) => void;
+    fetchMoviesStreamingPopularState: Query.State.t<MovieStreamingPopular>;
+    fetchMoviesStreamingPopular: () => void;
+    fetchMoviesTvPopularState: Query.State.t<MovieTvPopular>;
+    fetchMoviesTvPopular: () => void;
+  };
+
+  export const onChange = ({
+    state,
+    dispatch,
+    fetchMoviesStreamingPopularState,
+    fetchMoviesStreamingPopular,
+    fetchMoviesTvPopularState,
+    fetchMoviesTvPopular
+  }: onChangeParams) => {
     switch (state.tag) {
       case "idle":
         dispatch({ tag: "fetcMovie" });
         break;
       case "fetchingMovie":
-        const promiseStreaming = axios.get<MovieStreamingPopular>(
-          "https://api.themoviedb.org/3/movie/popular?api_key=11dfe233fe073aab1aaa3389310e3358"
-        );
+        if (fetchMoviesStreamingPopularState.tag === "idle") {
+          fetchMoviesStreamingPopular();
+        }
 
-        const promiseOnTv = axios.get<MovieTvPopular>(
-          "https://api.themoviedb.org/3/tv/popular?api_key=11dfe233fe073aab1aaa3389310e3358"
-        );
+        if (fetchMoviesTvPopularState.tag === "idle") {
+          fetchMoviesTvPopular();
+        }
 
-        Promise.all([promiseStreaming, promiseOnTv])
-          .then(([resStreaming, resOnTv]) =>
-            dispatch({
-              tag: "fetchMovieSuccess",
-              data: {
-                streaming: resStreaming.data.results,
-                onTv: resOnTv.data.results
-              }
-            })
-          )
-          .catch((err) =>
-            dispatch({ tag: "fetchMovieError", message: err.message })
-          );
+        if (
+          fetchMoviesStreamingPopularState.tag === "success" &&
+          fetchMoviesTvPopularState.tag === "success"
+        ) {
+          dispatch({
+            tag: "fetchMovieSuccess",
+            data: {
+              streaming: fetchMoviesStreamingPopularState.data.results,
+              onTv: fetchMoviesTvPopularState.data.results
+            }
+          });
+        }
+
+        if (fetchMoviesStreamingPopularState.tag === "error") {
+          dispatch({
+            tag: "fetchMovieError",
+            message: fetchMoviesStreamingPopularState.error.message
+          });
+        }
+
+        if (fetchMoviesTvPopularState.tag === "error") {
+          dispatch({
+            tag: "fetchMovieError",
+            message: fetchMoviesTvPopularState.error.message
+          });
+        }
         break;
       case "showingMovie":
         break;
