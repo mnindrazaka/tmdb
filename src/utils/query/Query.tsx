@@ -37,5 +37,11 @@ export const useQuery = <T,>(
     dispatch({ tag: "fetch" });
   }, [dispatch]);
 
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      refetch();
+    }
+  });
+
   return { state, refetch };
 };
