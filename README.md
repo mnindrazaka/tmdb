@@ -16,4 +16,7 @@ yarn dev
 
 # build for production
 yarn build
+
+# run test
+yarn test
 ```

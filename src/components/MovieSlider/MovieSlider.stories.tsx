@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import MovieSlider from "./MovieSlider";
+import MovieSlider from ".";
 import { fireEvent, waitFor, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 

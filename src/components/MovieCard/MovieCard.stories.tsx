@@ -1,6 +1,6 @@
-import { Box, ChakraProvider } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import MovieCard from "./MovieCard";
+import MovieCard from ".";
 
 export default {
   title: "Components/MovieCard",
