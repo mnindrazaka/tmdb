@@ -17,10 +17,10 @@ export namespace State {
   type onChangeParams = {
     state: State.t;
     dispatch: (action: Action.t) => void;
-    fetchMoviesStreamingPopularState: Query.State.t<MovieStreamingPopular>;
-    fetchMoviesStreamingPopular: () => void;
-    fetchMoviesTvPopularState: Query.State.t<MovieTvPopular>;
-    fetchMoviesTvPopular: () => void;
+    fetchMovieStreamingPopularState: Query.State.t<MovieStreamingPopular>;
+    fetchMovieStreamingPopular: () => void;
+    fetchMovieTvPopularState: Query.State.t<MovieTvPopular>;
+    fetchMovieTvPopular: () => void;
   };
 
   export const errorMessage = "Failed to fetch movies";
@@ -28,33 +28,33 @@ export namespace State {
   export const onChange = ({
     state,
     dispatch,
-    fetchMoviesStreamingPopularState,
-    fetchMoviesStreamingPopular,
-    fetchMoviesTvPopularState,
-    fetchMoviesTvPopular
+    fetchMovieStreamingPopularState,
+    fetchMovieStreamingPopular,
+    fetchMovieTvPopularState,
+    fetchMovieTvPopular
   }: onChangeParams) => {
     switch (state.tag) {
       case "idle":
         dispatch({ tag: "fetcMovie" });
         break;
       case "fetchingMovie":
-        if (fetchMoviesStreamingPopularState.tag === "idle") {
-          fetchMoviesStreamingPopular();
+        if (fetchMovieStreamingPopularState.tag === "idle") {
+          fetchMovieStreamingPopular();
         }
 
-        if (fetchMoviesTvPopularState.tag === "idle") {
-          fetchMoviesTvPopular();
+        if (fetchMovieTvPopularState.tag === "idle") {
+          fetchMovieTvPopular();
         }
 
         if (
-          fetchMoviesStreamingPopularState.tag === "success" &&
-          fetchMoviesTvPopularState.tag === "success"
+          fetchMovieStreamingPopularState.tag === "success" &&
+          fetchMovieTvPopularState.tag === "success"
         ) {
           dispatch({
-            tag: "fetchMovieSuccess",
+            tag: "fetchMovieuccess",
             data: {
-              streaming: fetchMoviesStreamingPopularState.data.results,
-              onTv: fetchMoviesTvPopularState.data.results
+              streaming: fetchMovieStreamingPopularState.data.results,
+              onTv: fetchMovieTvPopularState.data.results
             }
           });
         }
@@ -64,14 +64,14 @@ export namespace State {
         
         TODO: fix Query lib so it can return the error message
         */
-        if (fetchMoviesStreamingPopularState.tag === "error") {
+        if (fetchMovieStreamingPopularState.tag === "error") {
           dispatch({
             tag: "fetchMovieError",
             message: errorMessage
           });
         }
 
-        if (fetchMoviesTvPopularState.tag === "error") {
+        if (fetchMovieTvPopularState.tag === "error") {
           dispatch({
             tag: "fetchMovieError",
             message: errorMessage
@@ -96,7 +96,7 @@ export namespace Action {
   export type t =
     | { tag: "fetcMovie" }
     | {
-        tag: "fetchMovieSuccess";
+        tag: "fetchMovieuccess";
         data: {
           streaming: MovieStreamingPopular["results"];
           onTv: MovieTvPopular["results"];
@@ -119,7 +119,7 @@ export const make = (prevState: State.t, action: Action.t): State.t => {
       }
     case "fetchingMovie":
       switch (action.tag) {
-        case "fetchMovieSuccess":
+        case "fetchMovieuccess":
           return {
             ...prevState,
             tag: "showingMovie",

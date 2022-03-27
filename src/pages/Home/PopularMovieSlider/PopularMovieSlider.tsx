@@ -17,8 +17,8 @@ const PopularMovieSlider = () => {
   );
 
   const {
-    state: fetchMoviesStreamingPopularState,
-    refetch: fetchMoviesStreamingPopular
+    state: fetchMovieStreamingPopularState,
+    refetch: fetchMovieStreamingPopular
   } = useQuery(
     "popularStreamingMovies",
     () =>
@@ -28,7 +28,7 @@ const PopularMovieSlider = () => {
     { lazy: true }
   );
 
-  const { state: fetchMoviesTvPopularState, refetch: fetchMoviesTvPopular } =
+  const { state: fetchMovieTvPopularState, refetch: fetchMovieTvPopular } =
     useQuery(
       "popularTvMovies",
       () =>
@@ -42,18 +42,18 @@ const PopularMovieSlider = () => {
     MovieSliderReducer.State.onChange({
       state: movieState,
       dispatch,
-      fetchMoviesStreamingPopularState,
-      fetchMoviesStreamingPopular,
-      fetchMoviesTvPopularState,
-      fetchMoviesTvPopular
+      fetchMovieStreamingPopularState,
+      fetchMovieStreamingPopular,
+      fetchMovieTvPopularState,
+      fetchMovieTvPopular
     });
   }, [
     movieState,
     dispatch,
-    fetchMoviesStreamingPopularState,
-    fetchMoviesStreamingPopular,
-    fetchMoviesTvPopularState,
-    fetchMoviesTvPopular
+    fetchMovieStreamingPopularState,
+    fetchMovieStreamingPopular,
+    fetchMovieTvPopularState,
+    fetchMovieTvPopular
   ]);
 
   if (movieState.tag === "idle" || movieState.tag === "fetchingMovie") {
