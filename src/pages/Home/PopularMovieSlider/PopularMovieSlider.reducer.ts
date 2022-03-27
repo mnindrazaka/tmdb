@@ -23,6 +23,8 @@ export namespace State {
     fetchMoviesTvPopular: () => void;
   };
 
+  export const errorMessage = "Failed to fetch movies";
+
   export const onChange = ({
     state,
     dispatch,
@@ -57,17 +59,22 @@ export namespace State {
           });
         }
 
+        /*
+        We need to hardcode the error message for now because we can't get the error message from Query lib
+        
+        TODO: fix Query lib so it can return the error message
+        */
         if (fetchMoviesStreamingPopularState.tag === "error") {
           dispatch({
             tag: "fetchMovieError",
-            message: fetchMoviesStreamingPopularState.error.message
+            message: errorMessage
           });
         }
 
         if (fetchMoviesTvPopularState.tag === "error") {
           dispatch({
             tag: "fetchMovieError",
-            message: fetchMoviesTvPopularState.error.message
+            message: errorMessage
           });
         }
         break;
