@@ -1,5 +1,5 @@
-import axios from "axios";
 import { MovieStreamingPopular, MovieTvPopular } from "@/__generated__/api";
+import * as Query from "@/utils/query";
 
 export namespace State {
   export type t =
@@ -14,36 +14,69 @@ export namespace State {
       }
     | { tag: "error"; message: string };
 
-  export const onChange = (
-    state: State.t,
-    dispatch: (action: Action.t) => void
-  ) => {
+  type onChangeParams = {
+    state: State.t;
+    dispatch: (action: Action.t) => void;
+    fetchMovieStreamingPopularState: Query.State.t<MovieStreamingPopular>;
+    fetchMovieStreamingPopular: () => void;
+    fetchMovieTvPopularState: Query.State.t<MovieTvPopular>;
+    fetchMovieTvPopular: () => void;
+  };
+
+  export const errorMessage = "Failed to fetch movies";
+
+  export const onChange = ({
+    state,
+    dispatch,
+    fetchMovieStreamingPopularState,
+    fetchMovieStreamingPopular,
+    fetchMovieTvPopularState,
+    fetchMovieTvPopular
+  }: onChangeParams) => {
     switch (state.tag) {
       case "idle":
-        dispatch({ tag: "fetcMovie" });
+        dispatch({ tag: "fetchMovie" });
         break;
       case "fetchingMovie":
-        const promiseStreaming = axios.get<MovieStreamingPopular>(
-          "https://api.themoviedb.org/3/movie/popular?api_key=11dfe233fe073aab1aaa3389310e3358"
-        );
+        if (fetchMovieStreamingPopularState.tag === "idle") {
+          fetchMovieStreamingPopular();
+        }
 
-        const promiseOnTv = axios.get<MovieTvPopular>(
-          "https://api.themoviedb.org/3/tv/popular?api_key=11dfe233fe073aab1aaa3389310e3358"
-        );
+        if (fetchMovieTvPopularState.tag === "idle") {
+          fetchMovieTvPopular();
+        }
 
-        Promise.all([promiseStreaming, promiseOnTv])
-          .then(([resStreaming, resOnTv]) =>
-            dispatch({
-              tag: "fetchMovieSuccess",
-              data: {
-                streaming: resStreaming.data.results,
-                onTv: resOnTv.data.results
-              }
-            })
-          )
-          .catch((err) =>
-            dispatch({ tag: "fetchMovieError", message: err.message })
-          );
+        if (
+          fetchMovieStreamingPopularState.tag === "success" &&
+          fetchMovieTvPopularState.tag === "success"
+        ) {
+          dispatch({
+            tag: "fetchMovieSuccess",
+            data: {
+              streaming: fetchMovieStreamingPopularState.data.results,
+              onTv: fetchMovieTvPopularState.data.results
+            }
+          });
+        }
+
+        /*
+        We need to hardcode the error message for now because we can't get the error message from Query lib
+        
+        TODO: fix Query lib so it can return the error message
+        */
+        if (fetchMovieStreamingPopularState.tag === "error") {
+          dispatch({
+            tag: "fetchMovieError",
+            message: errorMessage
+          });
+        }
+
+        if (fetchMovieTvPopularState.tag === "error") {
+          dispatch({
+            tag: "fetchMovieError",
+            message: errorMessage
+          });
+        }
         break;
       case "showingMovie":
         break;
@@ -61,7 +94,7 @@ export namespace State {
 
 export namespace Action {
   export type t =
-    | { tag: "fetcMovie" }
+    | { tag: "fetchMovie" }
     | {
         tag: "fetchMovieSuccess";
         data: {
@@ -76,7 +109,7 @@ export const make = (prevState: State.t, action: Action.t): State.t => {
   switch (prevState.tag) {
     case "idle":
       switch (action.tag) {
-        case "fetcMovie":
+        case "fetchMovie":
           return {
             ...prevState,
             tag: "fetchingMovie"

@@ -12,6 +12,7 @@ import {
   tabOptionsOnTv
 } from "@/pages/Home/PopularMovieSlider/PopularMovieSlider";
 import { loadingText } from "@/components/MovieCard";
+import * as PopularMovieSliderReducer from "@/pages/Home/PopularMovieSlider/PopularMovieSlider.reducer";
 
 const renderPopularMovieSlider = async () => {
   render(<PopularMovieSlider />);
@@ -50,23 +51,19 @@ test("should have list of card main variant", async () => {
 
 test("should have a message error in error variant", async () => {
   const errorMessage = "Request failed with status code 403";
-
   server.use(
     rest.get("https://api.themoviedb.org/3/movie/popular", (req, res, ctx) => {
-      const apiKey = req.url.searchParams.get("api_key");
-      if (apiKey)
-        return res(
-          ctx.status(403),
-          ctx.json({
-            message: errorMessage
-          })
-        );
+      return res(
+        ctx.status(403),
+        ctx.json({
+          message: PopularMovieSliderReducer.State.errorMessage
+        })
+      );
     })
   );
   await renderPopularMovieSlider();
-
   const message = screen.getByRole("heading", {
-    name: errorMessage
+    name: PopularMovieSliderReducer.State.errorMessage
   });
 
   expect(message).toBeInTheDocument();
