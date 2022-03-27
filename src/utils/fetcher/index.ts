@@ -1,6 +1,8 @@
 {
   /*
   We need change absolute import path to general import, because when run test webpack can't detect folder /__generated__/
+  
+  TODO: fix the problem so it can use absolute import
 */
 }
 
