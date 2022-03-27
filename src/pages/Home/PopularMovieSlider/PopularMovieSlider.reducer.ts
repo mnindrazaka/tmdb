@@ -35,7 +35,7 @@ export namespace State {
   }: onChangeParams) => {
     switch (state.tag) {
       case "idle":
-        dispatch({ tag: "fetcMovie" });
+        dispatch({ tag: "fetchMovie" });
         break;
       case "fetchingMovie":
         if (fetchMovieStreamingPopularState.tag === "idle") {
@@ -51,7 +51,7 @@ export namespace State {
           fetchMovieTvPopularState.tag === "success"
         ) {
           dispatch({
-            tag: "fetchMovieuccess",
+            tag: "fetchMovieSuccess",
             data: {
               streaming: fetchMovieStreamingPopularState.data.results,
               onTv: fetchMovieTvPopularState.data.results
@@ -94,9 +94,9 @@ export namespace State {
 
 export namespace Action {
   export type t =
-    | { tag: "fetcMovie" }
+    | { tag: "fetchMovie" }
     | {
-        tag: "fetchMovieuccess";
+        tag: "fetchMovieSuccess";
         data: {
           streaming: MovieStreamingPopular["results"];
           onTv: MovieTvPopular["results"];
@@ -109,7 +109,7 @@ export const make = (prevState: State.t, action: Action.t): State.t => {
   switch (prevState.tag) {
     case "idle":
       switch (action.tag) {
-        case "fetcMovie":
+        case "fetchMovie":
           return {
             ...prevState,
             tag: "fetchingMovie"
@@ -119,7 +119,7 @@ export const make = (prevState: State.t, action: Action.t): State.t => {
       }
     case "fetchingMovie":
       switch (action.tag) {
-        case "fetchMovieuccess":
+        case "fetchMovieSuccess":
           return {
             ...prevState,
             tag: "showingMovie",
