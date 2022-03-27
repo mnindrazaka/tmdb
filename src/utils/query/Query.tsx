@@ -38,11 +38,15 @@ export const useQuery = <T,>(
   }, [dispatch]);
 
   React.useEffect(() => {
-    document.addEventListener("visibilitychange", () => {
+    const refetchWhenVisible = () => {
       if (document.visibilityState === "visible") {
         refetch();
       }
-    });
+    };
+    document.addEventListener("visibilitychange", refetchWhenVisible);
+    return () => {
+      document.addEventListener("visibilitychange", refetchWhenVisible);
+    };
   }, [refetch]);
 
   return { state, refetch };
