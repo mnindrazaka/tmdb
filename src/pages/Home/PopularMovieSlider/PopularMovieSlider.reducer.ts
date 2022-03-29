@@ -1,5 +1,6 @@
 import { MovieStreamingPopular, MovieTvPopular } from "@/__generated__/api";
 import * as Query from "@/utils/query";
+import { match } from "ts-pattern";
 
 export namespace State {
   export type t =
@@ -106,43 +107,59 @@ export namespace Action {
 }
 
 export const make = (prevState: State.t, action: Action.t): State.t => {
-  switch (prevState.tag) {
-    case "idle":
-      switch (action.tag) {
-        case "fetchMovie":
-          return {
-            ...prevState,
-            tag: "fetchingMovie"
-          };
-        default:
-          return prevState;
+  return match<[State.t, Action.t], State.t>([prevState, action])
+    .with([{ tag: "idle" }, { tag: "fetchMovie" }], () => ({
+      tag: "fetchingMovie"
+    }))
+    .with([{ tag: "idle" }, { tag: "fetchMovieSuccess" }], () => prevState)
+    .with([{ tag: "idle" }, { tag: "fetchMovieError" }], () => prevState)
+    .with([{ tag: "fetchingMovie" }, { tag: "fetchMovie" }], () => prevState)
+    .with(
+      [{ tag: "fetchingMovie" }, { tag: "fetchMovieSuccess" }],
+      ([_, action]) => ({
+        tag: "showingMovie",
+        data: {
+          streaming: action.data.streaming,
+          onTv: action.data.onTv
+        }
+      })
+    )
+    .with(
+      [{ tag: "fetchingMovie" }, { tag: "fetchMovieError" }],
+      ([_, action]) => ({
+        tag: "error",
+        message: action.message
+      })
+    )
+    .with([{ tag: "showingMovie" }, { tag: "fetchMovie" }], () => prevState)
+    .with(
+      [{ tag: "showingMovie" }, { tag: "fetchMovieSuccess" }],
+      ([_, action]) => ({
+        tag: "showingMovie",
+        data: {
+          streaming: action.data.streaming,
+          onTv: action.data.onTv
+        }
+      })
+    )
+    .with(
+      [{ tag: "showingMovie" }, { tag: "fetchMovieError" }],
+      ([_, action]) => ({
+        tag: "error",
+        message: action.message
+      })
+    )
+    .with([{ tag: "error" }, { tag: "fetchMovie" }], () => prevState)
+    .with([{ tag: "error" }, { tag: "fetchMovieSuccess" }], ([_, action]) => ({
+      tag: "showingMovie",
+      data: {
+        streaming: action.data.streaming,
+        onTv: action.data.onTv
       }
-    case "fetchingMovie":
-      switch (action.tag) {
-        case "fetchMovieSuccess":
-          return {
-            ...prevState,
-            tag: "showingMovie",
-            data: {
-              streaming: action.data.streaming,
-              onTv: action.data.onTv
-            }
-          };
-        case "fetchMovieError":
-          return {
-            ...prevState,
-            tag: "error",
-            message: action.message
-          };
-        default:
-          return prevState;
-      }
-    case "error":
-      return prevState;
-    case "showingMovie":
-      return prevState;
-    default:
-      const exhaustiveCheck: never = prevState;
-      return exhaustiveCheck;
-  }
+    }))
+    .with([{ tag: "error" }, { tag: "fetchMovieError" }], ([_, action]) => ({
+      tag: "error",
+      message: action.message
+    }))
+    .exhaustive();
 };
